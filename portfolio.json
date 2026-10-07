@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "owner": "Yash-PK",
+  "repository_prefix": "ops-",
+  "visibility": "public",
+  "max_active_projects": 1,
+  "permissions": {
+    "allow_cloud_resource_creation": false,
+    "allow_billable_services": false,
+    "allow_host_configuration_changes": false,
+    "publish_container_packages": false,
+    "publish_to_github": true
+  },
+  "hub": {
+    "repository": "ops-linux-devops-portfolio",
+    "active": true,
+    "capability_status": "implemented-unverified",
+    "publishing": {
+      "state": "pending",
+      "verified": false,
+      "url": null,
+      "verification": null
+    },
+    "ci": {
+      "state": "not-run",
+      "revision": null
+    }
+  },
+  "projects": [
+    {
+      "id": "linux-operations-toolkit",
+      "repository": "ops-linux-operations-toolkit",
+      "active": false,
+      "capability_status": "integration-tested",
+      "publishing": {
+        "state": "published",
+        "verified": true,
+        "url": "https://github.com/Yash-PK/ops-linux-operations-toolkit",
+        "verification": {
+          "owner": "Yash-PK",
+          "visibility": "PUBLIC",
+          "revision": "0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4",
+          "default_branch": "main"
+        }
+      },
+      "ci": {
+        "state": "passed",
+        "revision": "0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4"
+      }
+    },
+    {
+      "id": "linux-fleet-automation",
+      "repository": "ops-linux-fleet-automation",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "network-storage-services-lab",
+      "repository": "ops-network-storage-services-lab",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "containerized-service-platform",
+      "repository": "ops-containerized-service-platform",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "cloud-foundation-iac",
+      "repository": "ops-cloud-foundation-iac",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "delivery-pipelines",
+      "repository": "ops-delivery-pipelines",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "kubernetes-gitops-platform",
+      "repository": "ops-kubernetes-gitops-platform",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "observability-sre-lab",
+      "repository": "ops-observability-sre-lab",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "devsecops-policy-lab",
+      "repository": "ops-devsecops-policy-lab",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "backup-disaster-recovery",
+      "repository": "ops-backup-disaster-recovery",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "platform-engineering-golden-path",
+      "repository": "ops-platform-engineering-golden-path",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    },
+    {
+      "id": "production-simulation-capstone",
+      "repository": "ops-production-simulation-capstone",
+      "active": false,
+      "capability_status": "planned",
+      "publishing": {
+        "state": "not-created",
+        "verified": false,
+        "url": null,
+        "verification": null
+      },
+      "ci": {
+        "state": "not-run",
+        "revision": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+# Portfolio plan
+
+Configuration: owner `Yash-PK` (explicitly confirmed personal account), repository
+prefix `ops-`, public visibility, separate sibling repositories, at most one active
+engineering project. Primary future cloud: AWS. Original code license: MIT.
+Cloud creation, billable services, host configuration changes, and container
+package publication are disabled. No unstarted remote repositories are required.
+
+The first milestone is the hub plus a usable `linux-operations-toolkit`. Complete
+implementation, tests, documentation, a clean-clone validation, and a publishing
+review for each bounded core before activating the next project. Progress is
+evidence-driven; this plan is not evidence that the listed capabilities exist.
+
+## Milestone 1: operations foundation
+
+**Hub — `ops-linux-devops-portfolio` (active supporting index).** Acceptance:
+maintain the plan, matrix, current status, next task, dependency map, evidence
+index, scope boundaries, and continuation instructions; validate references and
+repository hygiene; publish only as a clearly labeled work in progress.
+
+**1. `ops-linux-operations-toolkit` (core complete; release documentation pending).** Implemented
+Python standard-library collectors with Bash demonstration orchestration for CPU,
+memory, load, disks/inodes, processes, services, sockets, local certificate expiry,
+and explicit backup freshness. Include permissions/ownership/ACL and current
+identity inspection, bounded journal/package/schedule/logrotate inspection, and
+capability reporting for relevant troubleshooting tools. Completed core acceptance:
+
+- Readable and versioned JSON output, validated thresholds/inputs, command
+  timeouts, summary-only logging, and meaningful status/exit codes.
+- Healthy, degraded, missing-tool, invalid-input, parser, and timeout fixtures.
+- An unprivileged read-only live demo on the supported environment; Linux core
+  integration evidence is required for Linux integration-tested claims.
+- Required lint, tests, documentation/security gates, and a clean-clone run pass.
+- Exact prerequisites, failure/recovery demo, runbooks, security model, decision
+  record, and tested revision are documented; unavailable data remains unknown.
+
+Local validation of `55f15eaacf3842fa15f44751d5f21a5094bd089c` passed 58 tests,
+lint, demo, secret scans and a clean clone. Published revision
+`0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4` passed the
+[Ubuntu Linux CI run](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37459272607),
+including seven live health sources, metadata/package/tool inspection, real
+temporary-file backup freshness recovery, certificate expiry policies, an observed
+systemd service, journald/schedules and ACL metadata. See the
+[evidence index](docs/evidence-index.md) for exact scope. Privileged diagnostics,
+full OS boot/reboot, cgroup policy and other distributions remain unverified.
+No default command remediates or changes host configuration. No engineering
+project is active while the hub's first-milestone publication gate is completed.
+
+## Milestone 2: disposable operating-system labs
+
+**2. `ops-linux-fleet-automation` (planned).** Reusable Ansible roles and cloud-init
+for selected maintained Ubuntu/Debian and Rocky/AlmaLinux versions. Implement
+users, SSH/sudo policy, packages, chrony, service management, firewall/logging,
+rolling patch orchestration, and a hardened web service. Explicit distro branches
+must preserve SELinux/AppArmor rather than disable them. Core acceptance:
+ansible-lint and Molecule checks; provisioning on every claimed distro; second
+converge idempotence; invalid-config rejection; service reachability; a reversible
+change. Real systemd and reboot claims require disposable VM tests. Choose and
+verify supported OS versions when the project becomes active.
+
+**3. `ops-network-storage-services-lab` (planned).** Isolated local VMs, private
+networks, and inventoried lab-owned virtual disks. Primary provider is selected
+after validating host support; KVM/libvirt is preferred on an appropriate Linux
+host, not assumed available on macOS. Separate DNS, isolated DHCP, NFS, Samba,
+reverse-proxy/load-balancing, local TLS, firewall, routing/bridge/VLAN, and storage
+profiles. Storage covers partitioning, ext4/XFS, LVM, software RAID, fstab, quotas,
+and LUKS. Core acceptance: client/server assertions, one bounded network fault,
+one storage recovery, and inventory-scoped teardown. Destructive demos require an
+explicit lab target, confirmation, dry run, and path/device ownership validation.
+
+## Milestone 3: reference workload and delivery
+
+**4. `ops-containerized-service-platform` (planned).** The common reference
+workload is an asynchronous jobs service: API accepts a synthetic job, a worker
+executes it, PostgreSQL stores durable state, a maintained compatible Redis/Valkey
+implementation supports queue/cache needs, and a reverse proxy exposes the API.
+Select one queue/cache implementation after compatibility research. Include
+migrations, deterministic seeds, tests, multi-stage non-root images, readiness,
+signal handling, resource settings, localhost administrative binds, and persistent
+volumes. Generate ignored local credentials at runtime. Core acceptance: submit
+and complete a job from clean setup; retain data after restart; handle one
+dependency outage predictably; pass unit/integration tests. Rootless Podman is a
+separately tested extension. Publish no container packages under current flags.
+
+**5. `ops-cloud-foundation-iac` (planned).** Select Terraform or OpenTofu as the
+primary engine, then verify supported versions/providers. AWS core modules cover
+VPC/subnets/routes, security groups, least-privilege IAM, encryption, tags,
+state/bootstrap design, and minimal compute configuration. Core acceptance is
+offline/static only: formatting, validation, lint, policy checks, and module mocks;
+disabled cost-bearing profiles; ignored state/plans/credentials; explicit state
+locking, drift, import, migration, and destroy procedures. Static, mock, authenticated
+plan, and applied states are separate. Load balancers, managed databases,
+Kubernetes, DNS, object storage, and audit logging are individually gated
+extensions. No cloud resource creation is authorized.
+
+**6. `ops-delivery-pipelines` (planned).** GitHub Actions is primary for the
+reference workload. Separate untrusted PR checks from trusted release/promotion;
+build once and promote the same digest where publishing is authorized. Implement
+lint/test/build/security gates, artifacts, release preparation, rollback, and a
+deliberately failing fixture. Core acceptance: exact-revision GitHub checks run,
+the negative gate blocks, and local scripts reproduce the core steps. Jenkinsfile,
+Configuration as Code, and isolated-agent operation form a distinct extension;
+unexecuted Jenkins/GitLab pipelines remain unverified. Registry/cloud deployment
+stays disabled under current authorization. Propose branch protections only after
+check names exist; preserve a usable maintainer path.
+
+## Milestone 4: local platform and operational signals
+
+**7. `ops-kubernetes-gitops-platform` (planned).** Select kind or k3d, Helm,
+Kustomize only where justified, Argo CD, a maintained Gateway API implementation,
+a NetworkPolicy-enforcing CNI, and cert-manager where appropriate. Pin context and
+namespace so scripts cannot target an existing cluster. Cover RBAC, service
+accounts, Pod Security, configuration/secrets references, requests/limits,
+health probes, storage, disruption budgets, metrics-backed autoscaling, rollouts,
+image-pull/DNS/scheduling failure triage, and node maintenance. Core acceptance:
+deploy workload; verify a denied network path; fail a bad release safely; restore
+service by Git rollback; demonstrate drift reconciliation. Local storage and
+control-plane limits remain explicit.
+
+**8. `ops-observability-sre-lab` (planned).** Instrument the same workload with
+OpenTelemetry. Resource-aware profiles use Prometheus, Grafana, Alertmanager,
+Loki, Tempo, and one maintained collector. Provision dashboards and rules;
+define an observable SLI/SLO, an error-budget policy, and runbook-linked alerts.
+Core acceptance: locate one generated request in trace/log evidence; trigger and
+resolve an alert using a controlled fault; run promtool rule tests and bounded k6
+load tests. Record environment, timestamps, load parameters, and limits; short
+measurements do not prove long-term availability. Explain sampling, cardinality,
+retention, telemetry privacy, and latency/error/traffic/saturation indicators.
+
+**9. `ops-devsecops-policy-lab` (planned).** Select a complementary minimal set for
+secrets, vulnerability scanning, SBOMs, signatures, IaC policy, and Kubernetes
+admission after maintenance/advisory review. Candidate tools are evaluated, not
+preselected claims. Add SOPS with age for local secrets; keep keys out of Git and
+logs. Core acceptance: safe valid/invalid fixtures exercise every enforced
+control; signature verification checks intended identity and issuer; document
+threat assumptions, findings, remediation, and narrow time-bound exceptions.
+OpenBao/Vault or External Secrets is a separately justified integration.
+
+## Milestone 5: recovery and service ownership
+
+**10. `ops-backup-disaster-recovery` (planned).** Encrypted restic file backups and
+PostgreSQL restore are the bounded core. Add WAL/PITR using a verified maintained
+tool as a separately tested profile. Include scheduling, retention, integrity,
+backup-failure alerts, and restore into a distinct clean destination. Core
+acceptance: seed identifiable synthetic data; back it up; simulate loss only in
+disposable lab resources; restore and verify records/checksums; measure observed
+recovery time/data loss against lab RTO/RPO targets. A backup artifact alone is
+not recovery evidence. Velero requires a backend/storage profile that can prove
+the claimed recovery semantics.
+
+**11. `ops-platform-engineering-golden-path` (planned).** Begin with a lightweight
+template generator and input schema. Generate a tested service with CI, container
+packaging, deployment configuration, telemetry hooks, ownership metadata, and
+operational docs. Core acceptance: generate into an empty temporary directory;
+reject invalid inputs; run generated tests; deploy to the local platform and
+verify telemetry. Do not copy secrets, hardcode the original account, or silently
+create repositories. Backstage is optional after resource/maintenance review.
+
+**12. `ops-production-simulation-capstone` (planned).** Integrate pinned releases
+without copying entire projects. Minimal and extended profiles demonstrate a
+release, telemetry-driven fault detection, triage, rollback/restore, and recovery
+verification. Core acceptance: repeatable bounded lifecycle script; failed
+deployment, dependency outage, and data-recovery scenarios; reversible injection
+with cleanup; actual timestamped results supporting a blameless *lab* postmortem
+and actionable backlog. This is not a real production incident.
+
+## Gates shared by all projects
+
+Before dependencies are selected, record official version/support, release-note,
+and advisory research. Pin reproducible versions and lockfiles, or state the exact
+verification gap. Review source/configuration, tests, license/attribution, docs,
+generated artifacts, staged files, and full outgoing history. Run required gates
+from a clean checkout. Record commands, exit codes, environment, tool versions,
+assertions, redacted output, and the tested source revision.
+
+Only then check the exact authorized remote name for collisions and create a new
+repository. Verify owner, public visibility, default branch, remote SHA, and the
+Actions run for that SHA. Publication and CI are separate states; pending CI is
+not release success. A versioned release requires its documented release gate.
