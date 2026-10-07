@@ -19,8 +19,9 @@ is published at `0d164e9158eeb9540e895d5f48bcf4723f36667b`. The
 [release-revision CI run](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37573353795)
 passed for that exact target; it does not replace the earlier evidence revisions.
 
-This hub remains a work-in-progress index. Its local and clean-clone gates passed;
-publication is pending final outgoing review and remote verification. No engineering project is currently active, and the other eleven projects
+This hub is a published work-in-progress index. Its local, clean-clone and
+[hosted CI gates](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37573748935) passed.
+The first milestone is complete. No engineering project is currently active, and the other eleven projects
 remain planned. See [project status](PROJECT_STATUS.md) and the
 [evidence index](docs/evidence-index.md) for revision and environment boundaries.
 

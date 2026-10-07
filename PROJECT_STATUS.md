@@ -6,7 +6,7 @@ identifies the exact source revisions and execution environments.
 
 | Project | Work state | Capability state | Publication | CI | Release |
 | --- | --- | --- | --- | --- | --- |
-| Portfolio hub | Active supporting index; first milestone gates in progress | statically-validated; local and clean-clone gates passed at `850a33de075c` | Pending final review and remote verification | Not run | Work in progress; no release |
+| Portfolio hub | First milestone complete; supporting index | statically-validated; local/clone source `850a33de075c` | [Public hub](https://github.com/Yash-PK/ops-linux-devops-portfolio) verified at `f1de5b4ee591` | [Passed for `f1de5b4ee591`](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37573748935) | Work-in-progress index; no release intended |
 | Linux operations toolkit | Bounded core complete; no longer active | integration-tested on Ubuntu x86-64 CI | Public repository; release target `0d164e9158ee` | Passed for `0d164e9158ee` | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0) |
 | Linux fleet automation | Not started | planned | Not created | Not run | None |
 | Network/storage services lab | Not started | planned | Not created | Not run | None |
@@ -73,18 +73,29 @@ runs. No local containers/VMs, host configuration, services or cloud resources w
 created. Cloud creation, paid services and container package publication remain
 **disabled**. Existing Git identity was used.
 
-## Remaining first-milestone work
+## Session boundary
 
-Toolkit release v0.1.0 is published. Complete the hub's final outgoing review/scans,
-new-repository publication and exact-SHA CI verification.
-Hub source `850a33de075cd5f43c4a1a30f4efa3830fea944d` passed `make doctor`,
-`make validate` (including 11 tests), `make demo` and `make security`; the actual
-[local report](evidence/850a33de075c-local.json) records all four exit codes as 0.
-The [clean-clone report](evidence/850a33de075c-clean-clone.json) for the same source
-records successful locked bootstrap, doctor, validation, demo and security, with
-scratch cleanup confirmed. Later documentation/ledger commits are not that
-original tested revision. Hub publication remains pending, with no hub remote URL
-or hosted CI result asserted yet. The other eleven projects have no implementation
-directories or remote repositories. No engineering project is active.
+The first milestone is complete: toolkit v0.1.0 and this public hub are published.
+The hub's recorded publication/CI snapshot is
+`f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e`, owner `Yash-PK`, visibility `PUBLIC`,
+default branch `main`. Its hosted workflow passed all four required command groups;
+[the preserved CI report](evidence/f1de5b4ee591-local.json) records actual results.
+Secret scanning, push protection and private vulnerability reporting were enabled
+and verified on both repositories. Branch rules are proposed, not imposed.
 
-See [next steps](NEXT_STEPS.md) for the exact continuation boundary.
+Hub local/clone source remains `850a33de075cd5f43c4a1a30f4efa3830fea944d`; reports
+are committed later. Subsequent index/evidence commits are identified in Git and
+receive their own CI runs; do not reinterpret them as the original tested source.
+The final handoff checks the latest remote HEAD separately from this saved snapshot.
+
+No unresolved required check or publication blocker remains. Optional full OS
+lifecycle, privileged diagnostics, non-Ubuntu Linux and cgroup policy remain
+unverified. No cloud deployment was performed. Temporary resources were cleaned;
+only source repositories and ignored developer caches remain.
+
+Changed artifacts in this milestone include the toolkit source/tests/CI/runbooks,
+the hub's plan, ledger, matrix, dependency/evidence indexes, and revision-linked
+reports. Commits describe those actual implementation and verification steps;
+no author identity, activity or results were fabricated. Both repository working
+trees must be inspected when resuming. The next bounded task is the fleet VM
+prerequisite/version/acceptance review in [NEXT_STEPS.md](NEXT_STEPS.md).

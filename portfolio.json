@@ -13,17 +13,23 @@
   },
   "hub": {
     "repository": "ops-linux-devops-portfolio",
-    "active": true,
+    "active": false,
     "capability_status": "statically-validated",
     "publishing": {
-      "state": "pending",
-      "verified": false,
-      "url": null,
-      "verification": null
+      "state": "published",
+      "verified": true,
+      "url": "https://github.com/Yash-PK/ops-linux-devops-portfolio",
+      "verification": {
+        "owner": "Yash-PK",
+        "visibility": "PUBLIC",
+        "revision": "f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e",
+        "default_branch": "main"
+      }
     },
     "ci": {
-      "state": "not-run",
-      "revision": null
+      "state": "passed",
+      "revision": "f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e",
+      "url": "https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37573748935"
     }
   },
   "projects": [

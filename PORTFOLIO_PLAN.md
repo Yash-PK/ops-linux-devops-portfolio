@@ -18,7 +18,7 @@ maintain the plan, matrix, current status, next task, dependency map, evidence
 index, scope boundaries, and continuation instructions; validate references and
 repository hygiene; publish only as a clearly labeled work in progress. Local
 and clean-clone gates passed at `850a33de075cd5f43c4a1a30f4efa3830fea944d`;
-publication/hosted CI remain pending. See the
+the public hub and exact-revision hosted CI are verified. See the
 [local report](evidence/850a33de075c-local.json) and
 [clean-clone report](evidence/850a33de075c-clean-clone.json).
 
@@ -53,7 +53,7 @@ is verified published at `0d164e9158eeb9540e895d5f48bcf4723f36667b`, with
 It is neither a draft nor a prerelease. The original local and Linux reports remain
 tied to their earlier recorded source revisions.
 No default command remediates or changes host configuration. No engineering
-project is active while the hub's first-milestone publication gate is completed.
+project is active at this first-milestone session boundary.
 
 ## Milestone 2: disposable operating-system labs
 

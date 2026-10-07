@@ -34,3 +34,10 @@ remained clean and the scratch directory was removed. Network bootstrap took
 These reports are committed after the tested source. Later ledger and documentation
 updates keep that provenance intact. Publication/CI state is maintained separately
 in PROJECT_STATUS.md and the machine-readable ledger.
+
+Hosted hub CI also passed for `f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e`:
+[run 37573748935](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37573748935).
+The [preserved artifact](../evidence/f1de5b4ee591-local.json) was downloaded and
+inspected. The hub remains statically-validated; its Linux-hosted ledger tests do
+not establish any unstarted project's integration. Publication and free
+repository-level security settings were verified independently.

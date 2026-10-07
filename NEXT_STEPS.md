@@ -1,61 +1,60 @@
 # Next steps
 
-The Linux operations toolkit core is complete and published; local source
-`55f15eaacf3842fa15f44751d5f21a5094bd089c` passed the required local and clean-clone
-gates, and published source `0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4` passed
-[Linux CI](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37459272607).
-[Release v0.1.0](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0)
-is now published as a non-draft, non-prerelease at
-`0d164e9158eeb9540e895d5f48bcf4723f36667b`, with
-[passing exact-revision CI](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37573353795).
-The earlier local and Linux evidence revisions remain unchanged.
-There are zero active engineering projects. The hub remains the active supporting
-index while first-milestone publication work finishes.
+The first milestone is complete. Both public repositories are published; the
+Linux operations toolkit has a verified v0.1.0 release. Local and clean-clone gates
+passed, and exact-revision hosted CI passed for each repository. There are zero
+active engineering projects and no unresolved publication blockers.
 
-## Finish the first milestone
+## Next bounded task
 
-1. Preserve the completed hub local and clean-clone evidence for source
-   `850a33de075cd5f43c4a1a30f4efa3830fea944d`. Both reports record passing gates,
-   and clean-clone scratch removal is confirmed. Later documentation/ledger
-   updates are separate commits and need their applicable checks; do not relabel
-   them as the original tested source.
-2. Review exact outgoing hub files, license/claims, staged contents and all outgoing
-   history. Publish the new authorized public hub only after its gates pass;
-   verify owner, visibility, branch, remote SHA and Actions for that exact SHA.
-3. Update `portfolio.json`, `PROJECT_STATUS.md`, the evidence index and this file
-   with actual final hub publication/CI state. Keep pending or blocked operations
-   explicit and retain a credential-free recovery command if publication fails.
-   Toolkit release v0.1.0 is already verified published; do not recreate it.
+Review fleet-automation VM prerequisites before creating its repository or roles:
 
-## Demo commands
+1. Read the saved plan, matrix, status and active-project instructions; reconcile
+   actual Git status/remotes and current Actions runs with saved snapshots.
+2. Establish permitted RAM, CPU, disk, architecture and virtualization support.
+   The host is Apple Silicon macOS; existing Colima was stopped, and this milestone
+   did not start or alter it. RAM metadata was unavailable to the initial sandbox.
+3. Select one isolated local VM provider that can exercise actual systemd and
+   reboot behavior without changing host SSH, networking or global packages.
+   Verify maintained Ubuntu/Debian-family and Rocky/Alma-family images, Ansible,
+   ansible-lint and Molecule releases/advisories from official sources.
+4. Write a bounded core acceptance checklist, resource/privilege budget, explicit
+   disposable inventory, distro-specific assertions, idempotency test and scoped
+   teardown. Keep unsupported providers as alternatives, not implemented claims.
+5. Start only that project when prerequisites permit. No cloud resources, billable
+   services, package publishing or host changes are authorized. Containers alone
+   cannot establish the required OS lifecycle behavior.
 
-From the toolkit checkout:
+See [dependencies](docs/dependency-map.md) and [the plan](PORTFOLIO_PLAN.md).
+The other eleven projects remain planned, without empty repositories.
+
+## Completed demonstrations
+
+From the existing toolkit checkout:
 
 ```sh
-make bootstrap
+cd /Users/hbsu/ops-linux-operations-toolkit
 make validate
 make demo
 ```
 
-`make integration` requires the documented Linux environment and tools. It is not
-a passing Linux test on macOS. The demo intentionally asserts degraded/unavailable
-fixture outcomes while returning success when those expected outcomes are met.
-From this hub checkout, `make demo` prints the validated saved portfolio ledger.
+`make integration` requires Linux; it intentionally exits unavailable on macOS.
+From a fresh checkout, first run `make bootstrap` using Python 3.11 or later.
+From the hub checkout, `make demo` prints the validated saved ledger; it does not
+execute sibling projects. Cleanup removed temporary test/clone files; ignored
+`.venv` and `.tools` caches remain to support repeat runs.
 
-## Next bounded task after this milestone
+## Evidence and continuation
 
-Review fleet-automation VM prerequisites: permitted CPU, RAM, disk, architecture
-and virtualization/provider support, then maintained distro/Ansible/Molecule
-versions from official documentation, release notes and advisories. Define its
-bounded core acceptance and disposable VM boundary before creating roles or a new
-repository. Real systemd/reboot/distro claims will need appropriate VM evidence;
-container-only tests do not substitute for it. Do not alter the host or provision
-cloud resources to satisfy prerequisites. See [dependencies](docs/dependency-map.md).
+Toolkit local/clone source: `55f15eaacf3842fa15f44751d5f21a5094bd089c`.
+Toolkit released and CI-tested revision: `0d164e9158eeb9540e895d5f48bcf4723f36667b`.
+Hub local/clone source: `850a33de075cd5f43c4a1a30f4efa3830fea944d`.
+Hub saved publication/CI snapshot: `f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e`.
+The final index update follows that snapshot and gets its own CI run; inspect
+current HEAD instead of treating an evidence-documentation commit as an older
+source revision. The evidence index preserves actual original reports.
 
-## Resume protocol
-
-Read `AGENTS.md`, `PROJECT_STATUS.md`, this file, and the toolkit's `AGENTS.md` and
-validation report. Inspect working-tree status, evidence and actual remotes before
-editing. Reconcile saved claims with current files and CI. Complete the first
-unfinished gate without regenerating completed source or fabricating activity.
-This document does not schedule work after the active session ends.
+Read AGENTS.md, PROJECT_STATUS.md, this file and the relevant project validation
+report on resumption. Preserve completed work, use the existing Git identity, and
+continue the first incomplete bounded task. Nothing is scheduled to continue
+after this session ends.

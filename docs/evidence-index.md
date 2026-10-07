@@ -3,12 +3,13 @@
 The toolkit has completed local and Linux integration evidence and published
 release v0.1.0. Hub local gates are recorded against its first tested source
 revision, and its clean-clone gate passed with scratch cleanup confirmed. Hub
-publication/hosted CI remain pending. No hub remote link is asserted here.
+publication and hosted CI are now verified at the recorded snapshot below.
 
 | Scope | Tested source revision | Environment | Check/result | Record |
 | --- | --- | --- | --- | --- |
 | Hub local gates | `850a33de075cd5f43c4a1a30f4efa3830fea944d` | macOS ARM64, Python 3.14.7 | Doctor, validation including 11 tests, demo and security all exit 0 | [Actual local report](../evidence/850a33de075c-local.json) |
 | Hub clean clone | `850a33de075cd5f43c4a1a30f4efa3830fea944d` | Temporary clone on macOS ARM64 | Locked bootstrap, doctor, validation, demo and security passed; scratch removed | [Actual clean-clone report](../evidence/850a33de075c-clean-clone.json) |
+| Hub hosted validation | `f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e` | Ubuntu x86-64, Python 3.14.7 | 11 tests plus lint, ledger demo and complete history scanning; all command groups exit 0 | [CI run](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37573748935); [preserved report](../evidence/f1de5b4ee591-local.json) |
 | T-local: toolkit fixtures/static checks and portable demo | `55f15eaacf3842fa15f44751d5f21a5094bd089c` | macOS 26.6.2 ARM64, Python 3.14.7, Bash 3.2 | 58 tests, lint, repository checks, fixture/portable demo and required secret scans passed | Toolkit `evidence/55f15eaacf38-local.json` |
 | T-local: toolkit clean clone | `55f15eaacf3842fa15f44751d5f21a5094bd089c` | Temporary clone on macOS ARM64 | Locked bootstrap, doctor, validation, demo and security passed; scratch clone removed | Toolkit `evidence/55f15eaacf38-clean-clone.json` |
 | T-Linux: toolkit core and observed systemd/ACL inspection | `0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4` | Hosted Ubuntu x86-64, kernel `6.17.0-1022-azure`, Python 3.14.7 | Linux integration assertions passed, including live optional systemd/journal/schedules and ACL checks | [Passing CI run and artifact](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37459272607); report `evidence/0b0f077933bb-linux.json` |
@@ -66,3 +67,12 @@ Use [project status](../PROJECT_STATUS.md) for publication/CI/release state and
 [the matrix](../SKILLS_MATRIX.md) for capability status. Failed, skipped, pending,
 unavailable and passed are distinct outcomes. A passing local check does not
 establish hosted CI, and a passing toolkit CI run does not establish a hub run.
+
+The [public hub](https://github.com/Yash-PK/ops-linux-devops-portfolio) was verified
+as PUBLIC under Yash-PK with default branch main at
+`f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e`. Its copied artifact retains the recorder's
+`local` profile name (hub validation), while its environment correctly identifies
+Linux. It is not Linux toolkit integration evidence. The separate
+[publication receipt](../evidence/publication-2026-10-07.json) records the verified
+remote/security/release snapshot. Later index-only commits do not change these
+original evidence identities.
