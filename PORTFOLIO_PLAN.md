@@ -16,9 +16,13 @@ evidence-driven; this plan is not evidence that the listed capabilities exist.
 **Hub — `ops-linux-devops-portfolio` (active supporting index).** Acceptance:
 maintain the plan, matrix, current status, next task, dependency map, evidence
 index, scope boundaries, and continuation instructions; validate references and
-repository hygiene; publish only as a clearly labeled work in progress.
+repository hygiene; publish only as a clearly labeled work in progress. Local
+and clean-clone gates passed at `850a33de075cd5f43c4a1a30f4efa3830fea944d`;
+publication/hosted CI remain pending. See the
+[local report](evidence/850a33de075c-local.json) and
+[clean-clone report](evidence/850a33de075c-clean-clone.json).
 
-**1. `ops-linux-operations-toolkit` (core complete; release documentation pending).** Implemented
+**1. `ops-linux-operations-toolkit` (core complete; v0.1.0 released).** Implemented
 Python standard-library collectors with Bash demonstration orchestration for CPU,
 memory, load, disks/inodes, processes, services, sockets, local certificate expiry,
 and explicit backup freshness. Include permissions/ownership/ACL and current
@@ -43,6 +47,11 @@ temporary-file backup freshness recovery, certificate expiry policies, an observ
 systemd service, journald/schedules and ACL metadata. See the
 [evidence index](docs/evidence-index.md) for exact scope. Privileged diagnostics,
 full OS boot/reboot, cgroup policy and other distributions remain unverified.
+[Release v0.1.0](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0)
+is verified published at `0d164e9158eeb9540e895d5f48bcf4723f36667b`, with
+[passing release-revision CI](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37573353795).
+It is neither a draft nor a prerelease. The original local and Linux reports remain
+tied to their earlier recorded source revisions.
 No default command remediates or changes host configuration. No engineering
 project is active while the hub's first-milestone publication gate is completed.
 

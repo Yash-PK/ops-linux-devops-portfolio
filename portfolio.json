@@ -14,7 +14,7 @@
   "hub": {
     "repository": "ops-linux-devops-portfolio",
     "active": true,
-    "capability_status": "implemented-unverified",
+    "capability_status": "statically-validated",
     "publishing": {
       "state": "pending",
       "verified": false,
@@ -39,13 +39,21 @@
         "verification": {
           "owner": "Yash-PK",
           "visibility": "PUBLIC",
-          "revision": "0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4",
+          "revision": "0d164e9158eeb9540e895d5f48bcf4723f36667b",
           "default_branch": "main"
         }
       },
       "ci": {
         "state": "passed",
-        "revision": "0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4"
+        "revision": "0d164e9158eeb9540e895d5f48bcf4723f36667b"
+      },
+      "release": {
+        "state": "published",
+        "tag": "v0.1.0",
+        "revision": "0d164e9158eeb9540e895d5f48bcf4723f36667b",
+        "url": "https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0",
+        "draft": false,
+        "prerelease": false
       }
     },
     {

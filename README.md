@@ -13,10 +13,14 @@ clean-clone validation passed; its
 [Linux CI run](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37459272607)
 passed at `0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4`. That run exercised real
 Ubuntu health sources, metadata inspection, certificate expiry and backup
-freshness. The toolkit core is complete; its release is pending final documentation.
+freshness. The toolkit core is complete and
+[release v0.1.0](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0)
+is published at `0d164e9158eeb9540e895d5f48bcf4723f36667b`. The
+[release-revision CI run](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37573353795)
+passed for that exact target; it does not replace the earlier evidence revisions.
 
-This hub remains a work-in-progress index with publication pending its own final
-gates. No engineering project is currently active, and the other eleven projects
+This hub remains a work-in-progress index. Its local and clean-clone gates passed;
+publication is pending final outgoing review and remote verification. No engineering project is currently active, and the other eleven projects
 remain planned. See [project status](PROJECT_STATUS.md) and the
 [evidence index](docs/evidence-index.md) for revision and environment boundaries.
 
@@ -124,8 +128,9 @@ their own verified prerequisites. Containers will not be represented as VMs;
 emulators will not be represented as proof of cloud compatibility.
 
 `make clean` removes only the repository's ignored `.runtime` directory.
-Temporary validation clones and integration files have been cleaned; local
-`.venv` and `.tools` caches are retained. No local container/VM runtime, host
+Toolkit temporary validation clones and integration files have been cleaned;
+local `.venv` and `.tools` caches are retained. The hub clean-clone gate also
+passed and removed its scratch checkout. No local container/VM runtime, host
 service, listener, or cloud resource was created. Do not delete project
 repositories as a cleanup shortcut.
 

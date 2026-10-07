@@ -6,8 +6,8 @@ identifies the exact source revisions and execution environments.
 
 | Project | Work state | Capability state | Publication | CI | Release |
 | --- | --- | --- | --- | --- | --- |
-| Portfolio hub | Active supporting index; first milestone gates in progress | implemented-unverified; 11 tests, lint and demo passed; final evidence pending | Pending clean-clone/final review and remote verification | Not run | Work in progress; no release |
-| Linux operations toolkit | Bounded core complete; no longer active | integration-tested on Ubuntu x86-64 CI | Public repository verified at `0b0f077933bb` | Passed for `0b0f077933bb` | Pending final documentation; no release created |
+| Portfolio hub | Active supporting index; first milestone gates in progress | statically-validated; local and clean-clone gates passed at `850a33de075c` | Pending final review and remote verification | Not run | Work in progress; no release |
+| Linux operations toolkit | Bounded core complete; no longer active | integration-tested on Ubuntu x86-64 CI | Public repository; release target `0d164e9158ee` | Passed for `0d164e9158ee` | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0) |
 | Linux fleet automation | Not started | planned | Not created | Not run | None |
 | Network/storage services lab | Not started | planned | Not created | Not run | None |
 | Containerized service platform | Not started | planned | Not created | Not run | None |
@@ -25,8 +25,12 @@ identifies the exact source revisions and execution environments.
 The verified public repository is
 [ops-linux-operations-toolkit](https://github.com/Yash-PK/ops-linux-operations-toolkit),
 owned by the confirmed personal account `Yash-PK`, visibility `PUBLIC`, default
-branch `main`, verified remote revision
-`0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4`.
+branch `main`. The verified non-draft, non-prerelease
+[release v0.1.0](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0)
+targets `0d164e9158eeb9540e895d5f48bcf4723f36667b`. Its
+[exact-revision CI run](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37573353795)
+passed. The earlier remote/evidence revision `0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4`
+remains the tested source for the original Linux report.
 
 Local source revision `55f15eaacf3842fa15f44751d5f21a5094bd089c` passed 58 tests,
 Ruff, ShellCheck, shfmt, actionlint, repository checks, the fixture/portable live
@@ -63,19 +67,24 @@ Pattern scanning does not guarantee absence of every secret. Toolkit repository
 secret scanning, push protection and private vulnerability reporting were verified
 enabled without adding a paid service. No account-wide settings were changed.
 
-Temporary clones and integration files, including the ephemeral certificate key,
-were cleaned. Ignored local developer caches (`.venv`, `.tools`) remain for repeat
+Toolkit temporary clones and integration files, including the ephemeral certificate
+key, were cleaned. The hub clean-clone gate passed and removed its scratch checkout. Ignored local developer caches (`.venv`, `.tools`) remain for repeat
 runs. No local containers/VMs, host configuration, services or cloud resources were
 created. Cloud creation, paid services and container package publication remain
 **disabled**. Existing Git identity was used.
 
 ## Remaining first-milestone work
 
-Finish toolkit release documentation and its documented release gate; do not
-present a pending release as created. Complete the hub's clean-clone/revision-linked
-evidence, final outgoing review/scans, new-repository publication and exact-SHA CI
-verification. Hub local structural checks passed, but no hub commit, remote URL or
-hosted CI result is asserted yet. The other eleven projects have no implementation
+Toolkit release v0.1.0 is published. Complete the hub's final outgoing review/scans,
+new-repository publication and exact-SHA CI verification.
+Hub source `850a33de075cd5f43c4a1a30f4efa3830fea944d` passed `make doctor`,
+`make validate` (including 11 tests), `make demo` and `make security`; the actual
+[local report](evidence/850a33de075c-local.json) records all four exit codes as 0.
+The [clean-clone report](evidence/850a33de075c-clean-clone.json) for the same source
+records successful locked bootstrap, doctor, validation, demo and security, with
+scratch cleanup confirmed. Later documentation/ledger commits are not that
+original tested revision. Hub publication remains pending, with no hub remote URL
+or hosted CI result asserted yet. The other eleven projects have no implementation
 directories or remote repositories. No engineering project is active.
 
 See [next steps](NEXT_STEPS.md) for the exact continuation boundary.

@@ -1,15 +1,18 @@
 # Evidence index
 
-The toolkit has completed local and Linux integration evidence. The hub's local
-structural checks passed, but its clean-clone run, initial tested commit and hosted
-CI remain pending. No hub SHA or remote link is asserted here.
+The toolkit has completed local and Linux integration evidence and published
+release v0.1.0. Hub local gates are recorded against its first tested source
+revision, and its clean-clone gate passed with scratch cleanup confirmed. Hub
+publication/hosted CI remain pending. No hub remote link is asserted here.
 
 | Scope | Tested source revision | Environment | Check/result | Record |
 | --- | --- | --- | --- | --- |
-| Hub ledger and structure | Not yet committed | macOS ARM64 | 11 tests, lint and ledger demo passed; final gate pending | Revision-linked hub evidence pending |
+| Hub local gates | `850a33de075cd5f43c4a1a30f4efa3830fea944d` | macOS ARM64, Python 3.14.7 | Doctor, validation including 11 tests, demo and security all exit 0 | [Actual local report](../evidence/850a33de075c-local.json) |
+| Hub clean clone | `850a33de075cd5f43c4a1a30f4efa3830fea944d` | Temporary clone on macOS ARM64 | Locked bootstrap, doctor, validation, demo and security passed; scratch removed | [Actual clean-clone report](../evidence/850a33de075c-clean-clone.json) |
 | T-local: toolkit fixtures/static checks and portable demo | `55f15eaacf3842fa15f44751d5f21a5094bd089c` | macOS 26.6.2 ARM64, Python 3.14.7, Bash 3.2 | 58 tests, lint, repository checks, fixture/portable demo and required secret scans passed | Toolkit `evidence/55f15eaacf38-local.json` |
 | T-local: toolkit clean clone | `55f15eaacf3842fa15f44751d5f21a5094bd089c` | Temporary clone on macOS ARM64 | Locked bootstrap, doctor, validation, demo and security passed; scratch clone removed | Toolkit `evidence/55f15eaacf38-clean-clone.json` |
 | T-Linux: toolkit core and observed systemd/ACL inspection | `0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4` | Hosted Ubuntu x86-64, kernel `6.17.0-1022-azure`, Python 3.14.7 | Linux integration assertions passed, including live optional systemd/journal/schedules and ACL checks | [Passing CI run and artifact](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37459272607); report `evidence/0b0f077933bb-linux.json` |
+| Toolkit release v0.1.0 | `0d164e9158eeb9540e895d5f48bcf4723f36667b` | Hosted CI | Exact-target CI passed; release verified non-draft and non-prerelease | [CI run](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37573353795); [published release](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0) |
 | Toolkit full OS boot/reboot and privileged diagnostics | None | Appropriate disposable VM exercise required | Unverified; not established by the read-only CI integration | None |
 | Other eleven engineering projects | None | Not started | planned | None |
 
@@ -18,9 +21,12 @@ the source of the local evidence copy; a subsequent evidence/documentation commi
 must preserve its recorded `0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4` tested revision.
 The verified toolkit remote is
 [ops-linux-operations-toolkit](https://github.com/Yash-PK/ops-linux-operations-toolkit),
-owner `Yash-PK`, visibility `PUBLIC`, branch `main`, verified remote SHA
-`0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4` at this update. A later commit is not
-silently substituted for either tested source revision.
+owner `Yash-PK`, visibility `PUBLIC`, branch `main`. Release v0.1.0 targets
+`0d164e9158eeb9540e895d5f48bcf4723f36667b` and has its own passing CI run. It does
+not replace the `55f15eaacf3842fa15f44751d5f21a5094bd089c` local or
+`0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4` original Linux evidence revisions.
+Similarly, later hub documentation/ledger commits do not replace the hub source
+`850a33de075cd5f43c4a1a30f4efa3830fea944d` recorded in its actual local report.
 
 ## What the Linux run established
 
@@ -52,8 +58,9 @@ Committed records identify source revision, timestamps, environment, tool
 versions, commands, exit codes, assertions and reviewed/redacted output. Synthetic
 fixture input remains explicitly separate from live observations. Gitleaks found
 no findings in the required working/staged/history scans; this is not a guarantee
-that every kind of secret can be detected. Temporary integration data and clone
-storage were cleaned; local ignored developer caches remain.
+that every kind of secret can be detected. Toolkit temporary integration data and
+clone storage were cleaned; local ignored developer caches remain. The hub
+clean-clone scratch checkout was also removed after its successful gate.
 
 Use [project status](../PROJECT_STATUS.md) for publication/CI/release state and
 [the matrix](../SKILLS_MATRIX.md) for capability status. Failed, skipped, pending,

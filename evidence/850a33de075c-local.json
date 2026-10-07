@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "revision": "850a33de075cd5f43c4a1a30f4efa3830fea944d",
+  "clean_at_start": true,
+  "environment": {
+    "os": "Darwin",
+    "release": "25.6.0",
+    "architecture": "arm64",
+    "python": "3.14.7"
+  },
+  "started_at": "2026-10-07T04:51:51.814109+00:00",
+  "profile": "local",
+  "commands": [
+    {
+      "argv": [
+        "make",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.256,
+      "output": "$REPO/.venv/bin/python scripts/doctor.py\nOS=Darwin arch=arm64 Python=3.14.7\ngit version 2.54.0 (Apple Git-157)\nGNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)\nCopyright (C) 2007 Free Software Foundation, Inc.\nruff 0.16.10\nShellCheck - shell script analysis tool\nversion: 0.11.0\nlicense: GNU General Public License, version 3\nwebsite: https://www.shellcheck.net\nv3.14.1\n1.7.12\ninstalled by downloading from release page\nbuilt with go1.26.1 compiler for darwin/arm64\n8.30.1\nHub has no Linux integration profile; engineering evidence lives in separate projects.\n"
+    },
+    {
+      "argv": [
+        "make",
+        "validate"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.201,
+      "output": ".venv/bin/ruff check .\nAll checks passed!\n.venv/bin/ruff format --check .\n30 files already formatted\n.tools/bin/shellcheck scripts/demo.sh\n.tools/bin/shfmt -d -i 2 scripts/demo.sh\nPATH=\"$REPO/.tools/bin:$PATH\" .tools/bin/actionlint\n$REPO/.venv/bin/python scripts/quality.py\nRepository structure, Python/JSON syntax, local document links and action pins: PASS\n$REPO/.venv/bin/python scripts/hub.py validate\nPortfolio ledger structure and authorization constraints: PASS\n$REPO/.venv/bin/python -m unittest discover -s tests -v\ntest_ci_pass_requires_exact_revision (test_hub.LedgerTests.test_ci_pass_requires_exact_revision) ... ok\ntest_cloud_authorization_cannot_be_enabled_by_ledger_edit (test_hub.LedgerTests.test_cloud_authorization_cannot_be_enabled_by_ledger_edit) ... ok\ntest_cloud_deployed_claim_rejected (test_hub.LedgerTests.test_cloud_deployed_claim_rejected) ... ok\ntest_duplicate_or_missing_project_rejected (test_hub.LedgerTests.test_duplicate_or_missing_project_rejected) ... ok\ntest_invalid_capability_status_rejected (test_hub.LedgerTests.test_invalid_capability_status_rejected) ... ok\ntest_malformed_objects_fail_validation (test_hub.LedgerTests.test_malformed_objects_fail_validation) ... ok\ntest_owner_change_rejected (test_hub.LedgerTests.test_owner_change_rejected) ... ok\ntest_remote_owner_mismatch_rejected_even_when_marked_verified (test_hub.LedgerTests.test_remote_owner_mismatch_rejected_even_when_marked_verified) ... ok\ntest_repository_ledger_valid (test_hub.LedgerTests.test_repository_ledger_valid) ... ok\ntest_two_active_projects_rejected (test_hub.LedgerTests.test_two_active_projects_rejected) ... ok\ntest_unverified_remote_link_rejected (test_hub.LedgerTests.test_unverified_remote_link_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "make",
+        "demo"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.037,
+      "output": "bash scripts/demo.sh\nSaved portfolio ledger; this command does not execute engineering projects.\nOwner: Yash-PK; visibility: public; active-project limit: 1\nCloud resources, billable services, host changes and container publishing: disabled\nops-linux-devops-portfolio: implemented-unverified; publishing=pending; CI=not-run; active\nops-linux-operations-toolkit: integration-tested; publishing=published; CI=passed\nops-linux-fleet-automation: planned; publishing=not-created; CI=not-run\nops-network-storage-services-lab: planned; publishing=not-created; CI=not-run\nops-containerized-service-platform: planned; publishing=not-created; CI=not-run\nops-cloud-foundation-iac: planned; publishing=not-created; CI=not-run\nops-delivery-pipelines: planned; publishing=not-created; CI=not-run\nops-kubernetes-gitops-platform: planned; publishing=not-created; CI=not-run\nops-observability-sre-lab: planned; publishing=not-created; CI=not-run\nops-devsecops-policy-lab: planned; publishing=not-created; CI=not-run\nops-backup-disaster-recovery: planned; publishing=not-created; CI=not-run\nops-platform-engineering-golden-path: planned; publishing=not-created; CI=not-run\nops-production-simulation-capstone: planned; publishing=not-created; CI=not-run\nSee PROJECT_STATUS.md and docs/evidence-index.md for actual revision-linked results.\n"
+    },
+    {
+      "argv": [
+        "make",
+        "security"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.148,
+      "output": "$REPO/.venv/bin/python scripts/security.py\n10:21AM INF scanned ~125014 bytes (125.01 KB) in 11.9ms\n10:21AM INF no leaks found\n10:21AM INF scanned ~125014 bytes (125.01 KB) in 12ms\n10:21AM INF no leaks found\n10:21AM INF 1 commits scanned.\n10:21AM INF scanned ~125014 bytes (125.01 KB) in 94.7ms\n10:21AM INF no leaks found\nWorking-tree and staged-file scans: PASS\n"
+    }
+  ],
+  "finished_at": "2026-10-07T04:51:53.456429+00:00",
+  "passed": true
+}

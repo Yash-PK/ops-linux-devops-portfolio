@@ -29,8 +29,8 @@ CI are tracked in [project status](PROJECT_STATUS.md), independently of this tab
 
 | Skill / bounded capability | Project | Implementation path / target | Executable check / target | Evidence | Status |
 | --- | --- | --- | --- | --- | --- |
-| Portfolio architecture, sequencing, acceptance | Hub | `PORTFOLIO_PLAN.md`, `docs/architecture.md`, `scripts/hub.py` | `make validate` | Local lint and 11 tests passed; committed revision evidence pending | implemented-unverified |
-| Evidence accounting and continuation | Hub | `portfolio.json`, `scripts/hub.py`, `tests/test_hub.py` | `make test`; `make demo` | Local ledger assertions and demo passed; full hub gate pending | implemented-unverified |
+| Portfolio architecture, sequencing, acceptance | Hub | `PORTFOLIO_PLAN.md`, `docs/architecture.md`, `scripts/hub.py` | `make validate` | Hub local and clean-clone reports at `850a33de075c`; see evidence index | statically-validated |
+| Evidence accounting and continuation | Hub | `portfolio.json`, `scripts/hub.py`, `tests/test_hub.py` | `make test`; `make demo` | Hub local and clean-clone reports at `850a33de075c`; 11 tests and demo passed | statically-validated |
 | CPU utilization, memory, normalized load | Toolkit | `src/ops_toolkit/collectors.py`: `cpu`, `memory`, `load` | `make test`; `make integration` metric invariants | T-local; T-Linux | integration-tested |
 | Disk capacity and inode pressure | Toolkit | `src/ops_toolkit/collectors.py`: `filesystem` | Fixture policy tests; portable demo; live Linux check | T-local; T-Linux | integration-tested |
 | Process counts/state and systemd service state | Toolkit | `src/ops_toolkit/collectors.py`: `processes`, `service` | Count/state invariants; observed `dbus.service` | T-Linux; no boot/reboot exercise | integration-tested |

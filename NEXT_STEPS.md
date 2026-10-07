@@ -4,25 +4,28 @@ The Linux operations toolkit core is complete and published; local source
 `55f15eaacf3842fa15f44751d5f21a5094bd089c` passed the required local and clean-clone
 gates, and published source `0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4` passed
 [Linux CI](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37459272607).
+[Release v0.1.0](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0)
+is now published as a non-draft, non-prerelease at
+`0d164e9158eeb9540e895d5f48bcf4723f36667b`, with
+[passing exact-revision CI](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37573353795).
+The earlier local and Linux evidence revisions remain unchanged.
 There are zero active engineering projects. The hub remains the active supporting
 index while first-milestone publication work finishes.
 
 ## Finish the first milestone
 
-1. Retain the actual Linux CI evidence in the toolkit and finalize its validation,
-   scope and release documentation. Preserve the tested source revisions in later
-   evidence/documentation commits. Create a release only after its documented
-   gates pass; none has been created at the time of this status update.
-2. Run the hub's updated required checks, commit reviewed source, and run its
-   clean-clone validation and revision-linked recorder. Its existing 11 tests,
-   lint and ledger demo passed, but this does not replace those remaining gates.
-3. Review exact outgoing hub files, license/claims, staged contents and all outgoing
+1. Preserve the completed hub local and clean-clone evidence for source
+   `850a33de075cd5f43c4a1a30f4efa3830fea944d`. Both reports record passing gates,
+   and clean-clone scratch removal is confirmed. Later documentation/ledger
+   updates are separate commits and need their applicable checks; do not relabel
+   them as the original tested source.
+2. Review exact outgoing hub files, license/claims, staged contents and all outgoing
    history. Publish the new authorized public hub only after its gates pass;
    verify owner, visibility, branch, remote SHA and Actions for that exact SHA.
-4. Update `portfolio.json`, `PROJECT_STATUS.md`, the evidence index and this file
-   with actual final hub publication/CI state and toolkit release state. Keep
-   pending or blocked operations explicit and retain a credential-free recovery
-   command if publication fails. Do not start another project during this session.
+3. Update `portfolio.json`, `PROJECT_STATUS.md`, the evidence index and this file
+   with actual final hub publication/CI state. Keep pending or blocked operations
+   explicit and retain a credential-free recovery command if publication fails.
+   Toolkit release v0.1.0 is already verified published; do not recreate it.
 
 ## Demo commands
 
