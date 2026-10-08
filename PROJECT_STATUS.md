@@ -2,14 +2,16 @@
 
 Capability, publication, CI and release state are independent. This portfolio is
 lab/reference engineering work. The [evidence index](docs/evidence-index.md)
-identifies the exact source revisions and execution environments.
+identifies the exact source revisions and execution environments. Two of twelve
+engineering cores are complete; the hub makes three verified public repositories.
+Ten engineering projects remain, with network/storage prerequisite review active.
 
 | Project | Work state | Capability state | Publication | CI | Release |
 | --- | --- | --- | --- | --- | --- |
 | Portfolio hub | First milestone complete; supporting index | statically-validated; local/clone source `850a33de075c` | [Public hub](https://github.com/Yash-PK/ops-linux-devops-portfolio) verified at `f1de5b4ee591` | [Passed for `f1de5b4ee591`](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37573748935) | Work-in-progress index; no release intended |
 | Linux operations toolkit | Bounded core complete; no longer active | integration-tested on Ubuntu x86-64 CI | Public repository; release target `0d164e9158ee` | Passed for `0d164e9158ee` | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0) |
-| Linux fleet automation | Not started | planned | Not created | Not run | None |
-| Network/storage services lab | Not started | planned | Not created | Not run | None |
+| Linux fleet automation | Bounded core complete; no longer active | integration-tested on Ubuntu and AlmaLinux ARM64 VMs | [Public repository](https://github.com/Yash-PK/ops-linux-fleet-automation); target `1531b86b54ee` | [Passed for `1531b86b54ee`](https://github.com/Yash-PK/ops-linux-fleet-automation/actions/runs/37615270935) | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-fleet-automation/releases/tag/v0.1.0) |
+| Network/storage services lab | Only active engineering project; prerequisite/acceptance stage | planned | Not created | Not run | None |
 | Containerized service platform | Not started | planned | Not created | Not run | None |
 | Cloud foundation IaC | Not started | planned | Not created | Not run | None |
 | Delivery pipelines | Not started | planned | Not created | Not run | None |
@@ -57,23 +59,29 @@ backup recovery, and certificate expiry does not validate trust or hostname.
 ## Environment, security and cleanup
 
 The local development host is macOS 26.6.2 ARM64 with 14 logical CPUs,
-Python 3.14.7 and Bash 3.2. RAM/disk and virtualization prerequisites still need a
-permitted resource assessment before selecting a heavy VM profile. Docker tooling
-is installed; Colima was stopped at assessment and no local runtime was created.
-The Linux evidence comes from the hosted CI runner, not this macOS host.
+Python 3.14.7 and Bash 3.2. Fleet prerequisite inspection verified 24 GiB RAM,
+hardware virtualization and about 1.6 TiB free disk at assessment time. Docker
+tooling is installed and existing Colima was stopped at the original assessment.
+The first milestone's toolkit Linux evidence comes from hosted CI. Fleet work has
+completed Ansible and real OS-lifecycle acceptance in isolated Ubuntu 24.04 and
+AlmaLinux 9.8 ARM64 Lima VZ guests locally. Neither guest is represented as a
+container or cloud deployment.
 
 Gitleaks found no findings in the required outgoing working/staged/history scans.
-Pattern scanning does not guarantee absence of every secret. Toolkit repository
-secret scanning, push protection and private vulnerability reporting were verified
-enabled without adding a paid service. No account-wide settings were changed.
+Pattern scanning does not guarantee absence of every secret. Secret scanning,
+push protection and private vulnerability reporting were verified enabled for
+all three public repositories without adding a paid service. No account-wide settings were changed.
 
 Toolkit temporary clones and integration files, including the ephemeral certificate
 key, were cleaned. The hub clean-clone gate passed and removed its scratch checkout. Ignored local developer caches (`.venv`, `.tools`) remain for repeat
-runs. No local containers/VMs, host configuration, services or cloud resources were
-created. Cloud creation, paid services and container package publication remain
-**disabled**. Existing Git identity was used.
+runs. Both recorded fleet guests were deleted, its owned registry is empty and
+its working tree was clean at release verification. Approximately 1.05 GiB of
+image caches, local tools and ignored private metadata/credentials remain.
+Inspect provider state before any resumed cleanup. Cloud creation, paid services,
+host configuration changes and container package publication remain **disabled**.
+Existing Git identity was used.
 
-## Session boundary
+## Completed first-milestone snapshot
 
 The first milestone is complete: toolkit v0.1.0 and this public hub are published.
 The hub's recorded publication/CI snapshot is
@@ -88,14 +96,55 @@ are committed later. Subsequent index/evidence commits are identified in Git and
 receive their own CI runs; do not reinterpret them as the original tested source.
 The final handoff checks the latest remote HEAD separately from this saved snapshot.
 
-No unresolved required check or publication blocker remains. Optional full OS
-lifecycle, privileged diagnostics, non-Ubuntu Linux and cgroup policy remain
-unverified. No cloud deployment was performed. Temporary resources were cleaned;
-only source repositories and ignored developer caches remain.
+No unresolved required check or publication blocker remains for the first
+milestone. Its optional full OS lifecycle, privileged diagnostics, non-Ubuntu Linux
+and cgroup policy remain unverified. No cloud deployment was performed. Its
+temporary resources were cleaned; fleet resource cleanup is recorded separately
+below.
 
 Changed artifacts in this milestone include the toolkit source/tests/CI/runbooks,
 the hub's plan, ledger, matrix, dependency/evidence indexes, and revision-linked
 reports. Commits describe those actual implementation and verification steps;
-no author identity, activity or results were fabricated. Both repository working
-trees must be inspected when resuming. The next bounded task is the fleet VM
-prerequisite/version/acceptance review in [NEXT_STEPS.md](NEXT_STEPS.md).
+no author identity, activity or results were fabricated. Inspect completed working
+trees on resumption. [NEXT_STEPS.md](NEXT_STEPS.md) records the active network/storage
+prerequisite review.
+
+## Completed fleet core
+
+The verified public [fleet repository](https://github.com/Yash-PK/ops-linux-fleet-automation)
+is owned by `Yash-PK`, visibility `PUBLIC`, default branch `main`.
+[Release v0.1.0](https://github.com/Yash-PK/ops-linux-fleet-automation/releases/tag/v0.1.0)
+is non-draft and non-prerelease, published `2026-10-07T11:38:28Z` at
+`1531b86b54eee87d01da83f7b55d7d405f43fadb`. The remote/tag SHA and
+[passing CI for that exact target](https://github.com/Yash-PK/ops-linux-fleet-automation/actions/runs/37615270935)
+were verified. No required core gate or publication blocker remains.
+
+Controller/clean-clone/Ubuntu source remains
+`c52155a5c15b04bdb2a85746b385da0243ecef93`; AlmaLinux source is
+`e333e1c8c37b107fb6e99924c869555acca0ad68`. The implementation fingerprint is
+`391a99a45747322a4358e199d1454d2b29f175e171592995cae890761137bb0d` in both VM
+reports. Controller validation passed 74 tests plus doctor, required lint, input
+demo and Gitleaks. The later `627e25c38de2` publishing clean clone and hosted Linux
+controller artifact passed separately; they do not replace original VM evidence.
+
+Both real VMs passed all nine workflow steps: strict SSH changed-key rejection
+(expected exit 255), Molecule converge/zero-change idempotence/verify, invalid
+input rejection with zero changes (expected exit 2), unchanged-service checks,
+content change/verification/restoration/verification, and patch/reboot with state
+checks before repair. Guest package versions and scoped teardown were recorded.
+Ubuntu retained AppArmor; AlmaLinux retained enforcing SELinux and firewalld policy.
+Each used macOS ARM64 Lima VZ, 2 CPUs, 2 GiB RAM and a 24 GiB sparse disk, one at
+a time, with no host mounts. Full results are in the [evidence index](docs/evidence-index.md).
+
+The earlier `8db4d22e1c56` post-reboot firewall failure remains archived. The
+corrected unit boot ordering passed a fresh Ubuntu run; no failed result was
+converted into a pass. Other distros/providers, external network-denial tests,
+multi-host availability and cloud deployment are outside the demonstrated core.
+
+## Active continuation — network/storage services lab
+
+Project 3 is the only active engineering project, at prerequisite and bounded
+acceptance review. Its capability state remains planned; no networking/storage
+implementation, integration pass or remote is credited yet. Confirm a supported
+provider, isolated networking and inventoried virtual-disk ownership before
+implementing the first profile. Projects 4–12 remain roadmap entries.

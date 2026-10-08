@@ -23,6 +23,14 @@ x86-64 [CI run](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/
 for `0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4`. Toolkit paths refer to the
 [verified standalone repository](https://github.com/Yash-PK/ops-linux-operations-toolkit).
 
+Fleet paths refer to the [verified released repository](https://github.com/Yash-PK/ops-linux-fleet-automation).
+**F-local** and **F-Ubuntu** identify controller/clean-clone and Ubuntu VM reports at
+`c52155a5c15b04bdb2a85746b385da0243ecef93`; **F-Alma** identifies the complete
+AlmaLinux VM report at `e333e1c8c37b107fb6e99924c869555acca0ad68`.
+Both VM profiles passed with the same implementation fingerprint. The released
+fleet core is integration-tested; other distributions/providers remain unverified.
+Network/storage is the active prerequisite review, with capabilities still planned.
+
 A capability can have different statuses for fixture and live profiles. Missing
 tools, skipped integrations, and mocks never become live passes. Publication and
 CI are tracked in [project status](PROJECT_STATUS.md), independently of this table.
@@ -44,10 +52,16 @@ CI are tracked in [project status](PROJECT_STATUS.md), independently of this tab
 | Bash orchestration; structured Python CLI | Toolkit | `bin/ops-toolkit`, `scripts/demo.sh`, `src/ops_toolkit/cli.py` | ShellCheck/shfmt/Ruff, CLI tests, portable demo and Linux integration | T-local; T-Linux | integration-tested |
 | JSON contract, thresholds, validation, exits and timeouts | Toolkit | `src/ops_toolkit/model.py`, `cli.py`, `backend.py`; `tests/` | Healthy/degraded/unavailable/invalid/parser/timeout assertions within 58 tests | T-local; T-Linux unit gates; timeout failure simulation | statically-validated |
 | Troubleshooting and read-only operational runbooks | Toolkit | `docs/demo.md`, `docs/runbooks/triage.md`, `scripts/demo.sh` | `make demo`; temporary-file freshness recovery in integration | T-local; T-Linux; bounded lab workflow | integration-tested |
-| Users, SSH/sudo policy, packages, chrony | Fleet automation | Planned Ansible roles/cloud-init | ansible-lint, Molecule, per-distro converge | None | planned |
-| Services, firewall, logging, rolling patch orchestration | Fleet automation | Planned roles/playbooks | VM reachability, reversible change, second converge | None | planned |
-| apt/dnf differences, SELinux/AppArmor handling | Fleet automation | Planned explicit distro branches | Per-distro config rejection and security assertions | None | planned |
-| Virtualization, cloud-init, systemd/reboots | Fleet automation; network/storage lab | Planned disposable VM inventory/provider | VM boot/reboot and inventory-scoped teardown | None | planned |
+| Locked fleet controller/bootstrap | Fleet automation | `requirements-dev.lock`, `collections.lock.json`, `provider.lock.json`, `scripts/bootstrap_fleet.py` | `make bootstrap`; `make doctor`; clean-clone gate | F-local: locked installation/doctor/validation/demo/security passed in clean clone; scratch removed | statically-validated |
+| Provider ownership, strict SSH and scoped Ubuntu lifecycle | Fleet automation | `scripts/lab.py`, `tests/test_lab.py`, `tests/test_paths.py`, `scripts/integration.py` | Provider safety tests; actual Ubuntu boot, changed-key rejection and teardown | F-local; F-Ubuntu: expected SSH exit 255 and owned teardown passed | integration-tested |
+| Typed role input rejection and safe controller demo | Fleet automation | `roles/ops_baseline/tasks/validate_inputs.yml`, `playbooks/check-input.yml`, `tests/test_role_inputs.py` | `make test`; `make demo` | F-local: actual Ansible assertions within 74 tests; valid input accepted and invalid input rejected | statically-validated |
+| Ubuntu users, SSH/sudo policy, apt packages and chrony | Fleet automation | `roles/ops_baseline/tasks/accounts.yml`, `roles/ops_baseline/tasks/packages.yml`, `roles/ops_baseline/tasks/services.yml`; `roles/ops_baseline/templates/` | `make integration LAB=ubuntu` | F-Ubuntu: real converge/verification, zero-change second converge and guest package-version capture | integration-tested |
+| Ubuntu nftables, journald, nginx and AppArmor preservation | Fleet automation | `roles/ops_baseline/tasks/firewall.yml`, `roles/ops_baseline/tasks/services.yml`, `roles/ops_baseline/tasks/web.yml`, `roles/ops_baseline/vars/Ubuntu.yml`; `playbooks/tasks/verify-state.yml` | Live service/policy/response assertions and post-reboot state checks | F-Ubuntu: all workflow steps passed; AppArmor retained; earlier firewall reboot failure archived | integration-tested |
+| AlmaLinux dnf, service differences, SELinux and firewalld | Fleet automation | `roles/ops_baseline/vars/AlmaLinux.yml`, `roles/ops_baseline/tasks/preflight.yml`, `roles/ops_baseline/tasks/firewall.yml`; shared baseline tasks | `make integration LAB=alma` | F-Alma: complete real-VM configuration and post-reboot checks passed; SELinux enforcing and firewalld retained | integration-tested |
+| Ubuntu rolling converge, idempotence and content change/rollback | Fleet automation | `playbooks/site.yml`, `molecule/default/molecule.yml`, `scripts/integration.py` | Real Molecule converge/idempotence/verify; live changed/restored responses | F-Ubuntu: second converge changed=0; invalid input exit 2 with zero changes; change and restoration verified | integration-tested |
+| Ubuntu cloud-init, systemd and explicit patch/reboot | Fleet automation | `scripts/lab.py`, `playbooks/patch.yml`, `playbooks/tasks/verify-state.yml` | `make integration LAB=ubuntu` with explicit lab identity | F-Ubuntu: real boot, patch/reboot and state checks before repair passed; teardown passed | integration-tested |
+| AlmaLinux lifecycle, idempotence and change/reboot acceptance | Fleet automation | Same guarded playbooks/provider; AlmaLinux variables and native service policy | `make integration LAB=alma` | F-Alma: all nine steps, zero-change second converge, rejection/change/restore/reboot and scoped teardown passed | integration-tested |
+| Additional virtualization and isolated network/storage provider profiles | Network/storage lab | Planned inventoried VM/network/disk profiles | Provider lifecycle and inventory-scoped teardown | None; fleet provider does not implement project 3 | planned |
 | DNS, isolated DHCP, routing, subnets, bridges/VLANs | Network/storage lab | Planned network profiles | Client/server queries, bounded fault, scoped capture | None | planned |
 | NFS, Samba, reverse proxy/load balancing, local TLS | Network/storage lab | Planned service profiles | Client read/write, proxy routing, TLS validation | None | planned |
 | nftables/firewalld and network failure diagnosis | Network/storage lab | Planned firewall/fault profiles | Allowed/denied connectivity assertions | None | planned |

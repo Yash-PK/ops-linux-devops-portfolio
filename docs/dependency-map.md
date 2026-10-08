@@ -2,8 +2,10 @@
 
 Repository order follows operational dependencies and keeps one engineering
 project active. Hub upkeep supports the active project and does not create another
-implementation workstream. This diagram describes the plan; only the first
-milestone is active.
+implementation workstream. This diagram describes the plan; the first
+two engineering cores are complete. The network/storage lab is the only active
+engineering project, at prerequisite/acceptance review; its capabilities remain
+planned until implementation and evidence exist.
 
 ```mermaid
 flowchart TD

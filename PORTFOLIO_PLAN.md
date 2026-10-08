@@ -52,22 +52,43 @@ is verified published at `0d164e9158eeb9540e895d5f48bcf4723f36667b`, with
 [passing release-revision CI](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37573353795).
 It is neither a draft nor a prerelease. The original local and Linux reports remain
 tied to their earlier recorded source revisions.
-No default command remediates or changes host configuration. No engineering
-project is active at this first-milestone session boundary.
+No default toolkit command remediates or changes host configuration. The first
+milestone is complete. Two engineering cores are now complete; the network/storage
+lab is the only active project, at prerequisite/acceptance review.
 
 ## Milestone 2: disposable operating-system labs
 
-**2. `ops-linux-fleet-automation` (planned).** Reusable Ansible roles and cloud-init
-for selected maintained Ubuntu/Debian and Rocky/AlmaLinux versions. Implement
-users, SSH/sudo policy, packages, chrony, service management, firewall/logging,
-rolling patch orchestration, and a hardened web service. Explicit distro branches
-must preserve SELinux/AppArmor rather than disable them. Core acceptance:
-ansible-lint and Molecule checks; provisioning on every claimed distro; second
-converge idempotence; invalid-config rejection; service reachability; a reversible
-change. Real systemd and reboot claims require disposable VM tests. Choose and
-verify supported OS versions when the project becomes active.
+**2. `ops-linux-fleet-automation` (core complete; v0.1.0 released).** The bounded
+core targets Ubuntu 24.04 ARM64 and AlmaLinux 9 ARM64 in explicitly owned
+macOS ARM64 Lima VZ guests. Controller tools and official images are pinned;
+controller dependencies are installed from hash-locked inputs. Source implements
+one coherent Ansible baseline role for accounts, SSH/sudo, packages, chrony,
+services, journald, native firewall policy and hardened nginx, with explicit
+Ubuntu/AlmaLinux differences and AppArmor/SELinux checks. A separate maintenance
+play gates package updates and guest reboot. The provider enforces private local
+state, a fixed lab ID, strict SSH trust and one running guest at a time.
 
-**3. `ops-network-storage-services-lab` (planned).** Isolated local VMs, private
+Recorded source `c52155a5c15b04bdb2a85746b385da0243ecef93` passed 74 controller
+tests, required lint/doctor/demo/security gates and the clean-clone quickstart.
+Its real Ubuntu run passed all nine workflow steps, including strict SSH changed-key
+rejection, Molecule converge/idempotence/verify, invalid-input rejection with zero
+changes, live service checks, reversible content change, patch/reboot verification
+before repair, guest package metadata and owned teardown. The earlier failed
+post-reboot firewall report remains archived; the corrected source passed a fresh
+run. The safe controller input demo remains distinct from guest provisioning.
+
+AlmaLinux 9.8 completed the same nine-step lifecycle at source
+`e333e1c8c37b107fb6e99924c869555acca0ad68`, with the same implementation fingerprint
+as the Ubuntu run, preserved SELinux/firewalld behavior and scoped teardown.
+Outgoing checks, final clean-clone validation and publication passed.
+[Release v0.1.0](https://github.com/Yash-PK/ops-linux-fleet-automation/releases/tag/v0.1.0)
+is verified at `1531b86b54eee87d01da83f7b55d7d405f43fadb` with
+[passing exact-target CI](https://github.com/Yash-PK/ops-linux-fleet-automation/actions/runs/37615270935).
+The original reports retain their source identities. Debian, Rocky and other
+providers remain separate unverified alternatives; no cloud deployment is claimed.
+
+**3. `ops-network-storage-services-lab` (active prerequisite/acceptance stage;
+capabilities planned).** Isolated local VMs, private
 networks, and inventoried lab-owned virtual disks. Primary provider is selected
 after validating host support; KVM/libvirt is preferred on an appropriate Linux
 host, not assumed available on macOS. Separate DNS, isolated DHCP, NFS, Samba,

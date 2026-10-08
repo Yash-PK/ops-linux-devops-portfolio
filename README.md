@@ -21,9 +21,20 @@ passed for that exact target; it does not replace the earlier evidence revisions
 
 This hub is a published work-in-progress index. Its local, clean-clone and
 [hosted CI gates](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37573748935) passed.
-The first milestone is complete. No engineering project is currently active, and the other eleven projects
-remain planned. See [project status](PROJECT_STATUS.md) and the
-[evidence index](docs/evidence-index.md) for revision and environment boundaries.
+Two of twelve engineering cores are complete, with three public repositories
+including this hub. The [fleet automation project](https://github.com/Yash-PK/ops-linux-fleet-automation)
+passed 74 controller tests, clean-clone checks, and both Ubuntu 24.04 and AlmaLinux
+9.8 ARM64 real-VM profiles. Each demonstrated strict SSH rejection, Molecule
+convergence/idempotence, policy/service checks, content rollback, patch/reboot
+verification before repair and scoped teardown. Its
+[v0.1.0 release](https://github.com/Yash-PK/ops-linux-fleet-automation/releases/tag/v0.1.0)
+is verified at `1531b86b54eee87d01da83f7b55d7d405f43fadb`, with
+[passing exact-revision CI](https://github.com/Yash-PK/ops-linux-fleet-automation/actions/runs/37615270935).
+
+Ten engineering projects remain. The network/storage lab is now the only active
+project, at prerequisite/acceptance review; its capabilities remain planned.
+Projects 4–12 remain roadmap entries. See [project status](PROJECT_STATUS.md) and
+the [evidence index](docs/evidence-index.md) for revision and environment boundaries.
 
 ## Start here
 
@@ -40,9 +51,14 @@ remain planned. See [project status](PROJECT_STATUS.md) and the
 flowchart LR
     Hub[Portfolio hub: plan and evidence index]
     Toolkit[Linux operations toolkit]
-    Future[Future standalone project repositories]
+    Fleet[Fleet automation: released core]
+    Network[Network/storage lab: prerequisite review]
+    Future[Projects 4–12: roadmap]
     Evidence[Revision-linked validation records]
     Hub --> Toolkit
+    Hub --> Fleet
+    Hub --> Network
+    Fleet --> Evidence
     Hub -. planned .-> Future
     Toolkit --> Evidence
     Evidence --> Hub
@@ -131,9 +147,13 @@ emulators will not be represented as proof of cloud compatibility.
 `make clean` removes only the repository's ignored `.runtime` directory.
 Toolkit temporary validation clones and integration files have been cleaned;
 local `.venv` and `.tools` caches are retained. The hub clean-clone gate also
-passed and removed its scratch checkout. No local container/VM runtime, host
-service, listener, or cloud resource was created. Do not delete project
-repositories as a cleanup shortcut.
+passed and removed its scratch checkout. Both fleet guests and clean-clone scratch
+checkouts were removed; its owned registry is empty. Approximately 1.05 GiB of
+image caches remains, alongside local tools and ignored private metadata/credentials.
+The fleet cleanup policy governs those resources. No cloud resources or host
+configuration changes are authorized.
+Do not delete project repositories or private ownership records as a cleanup
+shortcut.
 
 The [matrix](SKILLS_MATRIX.md) intentionally leaves unimplemented capabilities
 planned. Later projects add the asynchronous jobs reference workload, automation,
