@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "revision": "db1e22f7eeb6718fb0a9a6bfab3c7b83437793b8",
+  "profile": "clean-clone",
+  "clean_at_start": true,
+  "network_required": "bootstrap downloads checksum/hash-locked tools",
+  "environment": {
+    "os": "Darwin",
+    "release": "25.6.0",
+    "architecture": "arm64",
+    "python": "3.14.7"
+  },
+  "started_at": "2026-10-08T07:33:27.263032+00:00",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "clone",
+        "--no-local",
+        "--",
+        "$SOURCE_REPO",
+        "$CLEAN_CLONE"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 120,
+      "duration_seconds": 0.053,
+      "output": "Cloning into '$CLEAN_CLONE'...\n"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 30,
+      "duration_seconds": 0.01,
+      "output": "db1e22f7eeb6718fb0a9a6bfab3c7b83437793b8\n"
+    },
+    {
+      "argv": [
+        "make",
+        "PYTHON=/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "bootstrap"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 900,
+      "duration_seconds": 7.075,
+      "output": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14 scripts/bootstrap.py\nCollecting ruff==0.16.10 (from -r /private$CLEAN_CLONE/requirements-dev.lock (line 3))\n  Using cached ruff-0.16.10-py3-none-macosx_11_0_arm64.whl (9.8 MB)\nInstalling collected packages: ruff\nSuccessfully installed ruff-0.16.10\nDownloading shellcheck 0.11.0 (darwin-arm64)\nDownloading shfmt 3.14.1 (darwin-arm64)\nDownloading actionlint 1.7.12 (darwin-arm64)\nDownloading gitleaks 8.30.1 (darwin-arm64)\nDeveloper tools installed locally. No global packages changed.\n"
+    },
+    {
+      "argv": [
+        "make",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 600,
+      "duration_seconds": 2.068,
+      "output": "/private$CLEAN_CLONE/.venv/bin/python scripts/doctor.py\nOS=Darwin arch=arm64 Python=3.14.7\ngit version 2.54.0 (Apple Git-157)\nGNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)\nCopyright (C) 2007 Free Software Foundation, Inc.\nruff 0.16.10\nShellCheck - shell script analysis tool\nversion: 0.11.0\nlicense: GNU General Public License, version 3\nwebsite: https://www.shellcheck.net\nv3.14.1\n1.7.12\ninstalled by downloading from release page\nbuilt with go1.26.1 compiler for darwin/arm64\n8.30.1\nHub has no Linux integration profile; engineering evidence lives in separate projects.\n"
+    },
+    {
+      "argv": [
+        "make",
+        "validate"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 600,
+      "duration_seconds": 0.185,
+      "output": ".venv/bin/ruff check .\nAll checks passed!\n.venv/bin/ruff format --check .\n30 files already formatted\n.tools/bin/shellcheck scripts/demo.sh\n.tools/bin/shfmt -d -i 2 scripts/demo.sh\nPATH=\"/private$CLEAN_CLONE/.tools/bin:$PATH\" .tools/bin/actionlint\n/private$CLEAN_CLONE/.venv/bin/python scripts/quality.py\nRepository structure, Python/JSON syntax, local document links and action pins: PASS\n/private$CLEAN_CLONE/.venv/bin/python scripts/hub.py validate\nPortfolio ledger structure and authorization constraints: PASS\n/private$CLEAN_CLONE/.venv/bin/python -m unittest discover -s tests -v\ntest_ci_pass_requires_exact_revision (test_hub.LedgerTests.test_ci_pass_requires_exact_revision) ... ok\ntest_cloud_authorization_cannot_be_enabled_by_ledger_edit (test_hub.LedgerTests.test_cloud_authorization_cannot_be_enabled_by_ledger_edit) ... ok\ntest_cloud_deployed_claim_rejected (test_hub.LedgerTests.test_cloud_deployed_claim_rejected) ... ok\ntest_duplicate_or_missing_project_rejected (test_hub.LedgerTests.test_duplicate_or_missing_project_rejected) ... ok\ntest_invalid_capability_status_rejected (test_hub.LedgerTests.test_invalid_capability_status_rejected) ... ok\ntest_malformed_objects_fail_validation (test_hub.LedgerTests.test_malformed_objects_fail_validation) ... ok\ntest_owner_change_rejected (test_hub.LedgerTests.test_owner_change_rejected) ... ok\ntest_remote_owner_mismatch_rejected_even_when_marked_verified (test_hub.LedgerTests.test_remote_owner_mismatch_rejected_even_when_marked_verified) ... ok\ntest_repository_ledger_valid (test_hub.LedgerTests.test_repository_ledger_valid) ... ok\ntest_two_active_projects_rejected (test_hub.LedgerTests.test_two_active_projects_rejected) ... ok\ntest_unverified_remote_link_rejected (test_hub.LedgerTests.test_unverified_remote_link_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "make",
+        "demo"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 600,
+      "duration_seconds": 0.04,
+      "output": "bash scripts/demo.sh\nSaved portfolio ledger; this command does not execute engineering projects.\nOwner: Yash-PK; visibility: public; active-project limit: 1\nCloud resources, billable services, host changes and container publishing: disabled\nops-linux-devops-portfolio: statically-validated; publishing=published; CI=passed; active\nops-linux-operations-toolkit: integration-tested; publishing=published; CI=passed\nops-linux-fleet-automation: integration-tested; publishing=published; CI=passed\nops-network-storage-services-lab: integration-tested; publishing=published; CI=passed\nops-containerized-service-platform: integration-tested; publishing=published; CI=passed\nops-cloud-foundation-iac: planned; publishing=not-created; CI=not-run; active\nops-delivery-pipelines: planned; publishing=not-created; CI=not-run\nops-kubernetes-gitops-platform: planned; publishing=not-created; CI=not-run\nops-observability-sre-lab: planned; publishing=not-created; CI=not-run\nops-devsecops-policy-lab: planned; publishing=not-created; CI=not-run\nops-backup-disaster-recovery: planned; publishing=not-created; CI=not-run\nops-platform-engineering-golden-path: planned; publishing=not-created; CI=not-run\nops-production-simulation-capstone: planned; publishing=not-created; CI=not-run\nSee PROJECT_STATUS.md and docs/evidence-index.md for actual revision-linked results.\n"
+    },
+    {
+      "argv": [
+        "make",
+        "security"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 600,
+      "duration_seconds": 1.231,
+      "output": "/private$CLEAN_CLONE/.venv/bin/python scripts/security.py\n1:03PM INF scanned ~241552 bytes (241.55 KB) in 19.1ms\n1:03PM INF no leaks found\n1:03PM INF scanned ~241552 bytes (241.55 KB) in 18.2ms\n1:03PM INF no leaks found\n1:03PM INF Unknown SCM platform. Use --platform to include links in findings. host=\n1:03PM INF 10 commits scanned.\n1:03PM INF scanned ~287600 bytes (287.60 KB) in 106ms\n1:03PM INF no leaks found\nWorking-tree and staged-file scans: PASS\n"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 30,
+      "duration_seconds": 0.013,
+      "output": ""
+    }
+  ],
+  "assertions": [
+    {
+      "name": "clone_revision_matches_source",
+      "passed": true
+    },
+    {
+      "name": "clone_remains_clean_after_checks",
+      "passed": true
+    }
+  ],
+  "not_run": [],
+  "temporary_clone_removed": true,
+  "finished_at": "2026-10-08T07:33:37.982202+00:00",
+  "passed": true
+}
