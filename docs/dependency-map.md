@@ -3,9 +3,8 @@
 Repository order follows operational dependencies and keeps one engineering
 project active. Hub upkeep supports the active project and does not create another
 implementation workstream. This diagram describes the plan; the first
-two engineering cores are complete. The network/storage lab is the only active
-engineering project. Its source and standalone dependency bootstrap exist;
-complete current-code integration is still required before its core is complete.
+three engineering cores are complete. The containerized service platform is the
+only active engineering project, beginning with acceptance and dependency review.
 
 ```mermaid
 flowchart TD
@@ -49,12 +48,10 @@ worker, PostgreSQL, queue/cache, and reverse proxy. Delivery, Kubernetes,
 observability, security, and recovery will exercise this common application.
 The application is planned, not implemented by this hub.
 
-The active network/storage project also pins Lima VZ, an official Ubuntu ARM64
+The completed network/storage project also pins Lima VZ, an official Ubuntu ARM64
 image and 41 selected packages from snapshot `20261007T000000Z`. Its authenticated
 reboot must run locked kernel `6.8.0-146-generic` before profiles. Namespace clients
-and loop-backed disks are created only inside the owned VM. The earlier storage
-development pass preceded this dependency revision, so fresh complete integration
-is required. These pins do not establish KVM/libvirt or another provider.
+and loop-backed disks are created only inside the owned VM. The formal all-profile VM run verified this dependency revision and cleanup. These pins do not establish KVM/libvirt or another provider.
 
 No remote source, dependency version, image digest, or cross-project release has
 been invented here. Each active project records official support/release/advisory

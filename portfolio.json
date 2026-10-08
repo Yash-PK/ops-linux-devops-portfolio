@@ -22,14 +22,14 @@
       "verification": {
         "owner": "Yash-PK",
         "visibility": "PUBLIC",
-        "revision": "cd9a6741e3d6d54e3cd39fff18d1f40359bf5313",
+        "revision": "e6bd08197a96f5f7ee4dc9b35b72ef1007792f0d",
         "default_branch": "main"
       }
     },
     "ci": {
       "state": "passed",
-      "revision": "cd9a6741e3d6d54e3cd39fff18d1f40359bf5313",
-      "url": "https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426"
+      "revision": "e6bd08197a96f5f7ee4dc9b35b72ef1007792f0d",
+      "url": "https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37734298497"
     }
   },
   "projects": [
@@ -108,19 +108,21 @@
     {
       "id": "network-storage-services-lab",
       "repository": "ops-network-storage-services-lab",
-      "active": true,
-      "capability_status": "implemented-unverified",
+      "active": false,
+      "capability_status": "integration-tested",
       "local_path": "../ops-network-storage-services-lab",
       "validation": {
-        "source_revision": null,
-        "source_state": "uncommitted",
-        "controller": "statically-validated",
-        "fixture_tests_passed": 120,
-        "lint": "passed",
-        "safe_demo": "passed",
-        "clean_clone": "not-run",
-        "formal_all_profiles_vm": "not-run",
-        "network_development": "in-progress",
+        "controller_source_revision": "a9950a19f7fe578c9e27b4cf59e0a1ebafdbd8ac",
+        "source_revision": "e43bcdfdae1a604a095eea085e81eb8fbe2e6d00",
+        "code_sha256": "0ddbae1dd5d52f9c6100f22910535571e189e49c29411f950731b4852bfea593",
+        "controller": "passed",
+        "fixture_tests_passed": 122,
+        "clean_clone": "passed",
+        "formal_all_profiles_vm": "passed",
+        "commands": 605,
+        "assertions": 110,
+        "cleanup_passed": true,
+        "ci_artifact_source_revision": "0f6f5faebc0c3d2e381a66fcaaa656e3e75ccaaa",
         "earlier_storage_development": {
           "development": true,
           "revision": "uncommitted",
@@ -131,32 +133,38 @@
           "passed": true,
           "cleanup_passed": true,
           "qualifies_current_release": false
-        },
-        "latest_completed_network_development": {
-          "report": ".runtime/reports/uncommitted-network-vm-20261008T053143.json",
-          "development": true,
-          "revision": "uncommitted",
-          "passed": false,
-          "cleanup_passed": true,
-          "failure": "Samba exited 255 during startup; guest background-service cleanup assertion failed",
-          "qualifies_current_release": false
         }
       },
       "publishing": {
-        "state": "not-created",
-        "verified": false,
-        "url": null,
-        "verification": null
+        "state": "published",
+        "verified": true,
+        "url": "https://github.com/Yash-PK/ops-network-storage-services-lab",
+        "verification": {
+          "owner": "Yash-PK",
+          "visibility": "PUBLIC",
+          "revision": "53b78f81ed58602efd2c151d449338615ab61e9d",
+          "default_branch": "main"
+        }
       },
       "ci": {
-        "state": "not-run",
-        "revision": null
+        "state": "passed",
+        "revision": "53b78f81ed58602efd2c151d449338615ab61e9d",
+        "url": "https://github.com/Yash-PK/ops-network-storage-services-lab/actions/runs/37735444827"
+      },
+      "release": {
+        "state": "published",
+        "tag": "v0.1.0",
+        "revision": "53b78f81ed58602efd2c151d449338615ab61e9d",
+        "url": "https://github.com/Yash-PK/ops-network-storage-services-lab/releases/tag/v0.1.0",
+        "draft": false,
+        "prerelease": false,
+        "published_at": "2026-10-08T06:03:14Z"
       }
     },
     {
       "id": "containerized-service-platform",
       "repository": "ops-containerized-service-platform",
-      "active": false,
+      "active": true,
       "capability_status": "planned",
       "publishing": {
         "state": "not-created",

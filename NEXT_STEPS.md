@@ -1,39 +1,33 @@
 # Next steps
 
-Two of twelve engineering cores are complete: Linux operations toolkit and Linux
-fleet automation, each with a verified v0.1.0 release. The supporting hub makes
-three public repositories. Ten engineering projects remain. **The network/storage
-lab is the only active engineering project**, with local implementation under
-validation. Its overall state is implemented-unverified; its 120 fixture tests,
-required lint and safe demo passed on uncommitted source. Projects 4–12 remain
-roadmap entries.
+Three of twelve engineering cores are complete: operations toolkit, fleet automation
+and network/storage, each with a verified v0.1.0 release. The hub makes four public
+repositories. Nine engineering projects remain. **The containerized service
+platform is the only active project**, beginning with acceptance and dependency
+review; its capabilities are still planned. Projects 5–12 remain roadmap entries.
 
 ## Current bounded task
 
-1. Read the network/storage repository's `AGENTS.md` and `docs/validation.md`;
-   inspect Git status and its owned provider state before any new VM operation.
-   Continue the existing implementation rather than regenerating it. Network
-   development validation is active and no current cleanup outcome is credited
-   here; do not create a second VM or remove unrelated resources.
-2. Resolve actual network-profile VM failures and rerun affected checks. Exercise
-   all profiles against the revised 41-package snapshot lock after authenticated
-   reboot into `6.8.0-146-generic`. An earlier development storage pass at a different
-   fingerprint does not satisfy this required gate.
-3. Review source, tests, documentation and outgoing secrets; create a meaningful
-   source commit using the existing Git identity. From clean source, record the
-   complete all-profile VM lifecycle, controller gates and standalone clean-clone
-   quickstart. Preserve failed reports; require all core assertions and cleanup.
-4. Review exact outgoing files/history, license, dependency records and claims.
-   Run `make gate`, check the authorized target for collision, then use the
-   credential-free publishing script to create the new public repository only
-   after gates pass. Verify owner/visibility/branch/SHA and exact-target GitHub CI.
-   Release only after the documented release gates pass.
-5. Update every hub ledger with verified revision/evidence/publication state, then
-   activate project 4. Create no empty future remote repositories.
+1. Inspect only the next project path and relevant container/runtime metadata.
+   Do not start or modify an unrelated Docker/Colima environment. No global
+   packages or host configuration changes are authorized.
+2. Define the reference asynchronous jobs API/worker/PostgreSQL/cache/proxy core,
+   its acceptance checklist, resource limits and failure/recovery behavior before
+   coding. Verify maintained compatible dependencies and pin images/packages.
+3. Implement the application, migrations, deterministic synthetic seed data,
+   guarded local credentials, multi-stage containers and Compose readiness.
+   Keep publishing packages and cloud deployment disabled.
+4. Run unit/integration tests: a clean setup submits/completes a job, data survives
+   service restart, and dependency failure is bounded and recoverable. Exercise
+   real containers in a project-owned local environment; distinguish it from VM
+   and cloud proof. Rootless Podman remains a separate extension until tested.
+5. Finish documentation, CI, clean-clone and outgoing/security gates before creating
+   the new public repository. Verify exact-target CI before release. Keep one
+   active engineering project and do not create empty future remotes.
 
-No unresolved fleet core or publishing blocker remains. Preserve its completed
-source and original evidence identities. No host configuration changes, cloud
-resources, billable services or container publishing are authorized.
+No unresolved core, publication or release blocker remains for projects 1–3.
+Preserve their implementation and original evidence identities. The portfolio is
+lab/reference work; no cloud deployment or professional-experience claim is made.
 
 ## Completed demonstrations
 
@@ -63,7 +57,7 @@ integration runs. Development mode writes ignored diagnostics and does not satis
 the release-evidence gate. The hub's `make demo` prints saved status and does not
 execute sibling projects.
 
-The active network/storage controller demo allocates no VM:
+The completed network/storage controller demo allocates no VM:
 
 ```sh
 cd /Users/hbsu/ops-network-storage-services-lab
@@ -74,9 +68,9 @@ make demo
 
 Read its local README before a real integration run.
 `make integration LAB=ops-network-storage-reference` requires clean committed source, creates one
-owned VM and attempts scoped teardown. Do not run it while the active development
-VM is registered. Development reports are ignored and cannot satisfy publication
-or release gates. No network/storage GitHub URL has been verified.
+owned VM and attempts scoped teardown. Check its registry before starting.
+[Published v0.1.0](https://github.com/Yash-PK/ops-network-storage-services-lab/releases/tag/v0.1.0)
+passed all profiles; development reports remain separate from release proof.
 
 Both recorded fleet guests were deleted and its provider registry is empty.
 Approximately 1.05 GiB of image caches remains, alongside tools and ignored
@@ -101,11 +95,13 @@ Both fleet VM reports share implementation fingerprint
 The earlier failed `8db4d22e1c56` Ubuntu report remains archived. Later evidence,
 documentation and release commits never replace original tested revisions.
 
-Network/storage source is uncommitted in this snapshot. The earlier storage-only
-development observation used implementation fingerprint
-`cb7df988b7260c318f24f38db86a2e334f9b8f0ad773017abf977cb0a3a9b1a6`, with
-438 commands, 63 assertions and VM cleanup passing. Current dependency/reboot
-changes need fresh formal evidence; no completed project count is added for it.
+Network/storage controller source is `a9950a19f7fe578c9e27b4cf59e0a1ebafdbd8ac`;
+formal VM/clone source is `e43bcdfdae1a604a095eea085e81eb8fbe2e6d00`, fingerprint
+`0ddbae1dd5d52f9c6100f22910535571e189e49c29411f950731b4852bfea593`.
+Release and exact-target CI passed at `53b78f81ed58602efd2c151d449338615ab61e9d`.
+All 605 VM commands/110 assertions and cleanup passed; 122 controller tests passed.
+The temporary clone and owned VM were removed. About 793 MiB of ignored project
+caches/tools/private metadata remains. Earlier development failures stay documented.
 
 Read AGENTS.md, PROJECT_STATUS.md, this file and the active project's instructions
 on resumption. Reconcile actual files, Git status, remotes, evidence and owned

@@ -10,13 +10,11 @@ Architecture: the hub holds plans, capability accounting, and evidence pointers.
 Each implementation lives in its own sibling Git repository, never inside this
 working tree. At most one engineering project is active. The first completed core
 is `ops-linux-operations-toolkit`; consult the ledger for current active work.
-Toolkit and fleet automation have completed bounded cores and published v0.1.0
-releases. The network/storage lab is the only active engineering project. Its
-network/storage source and controller checks exist, but the complete current-code
-VM, clean-clone and publication gates remain incomplete. Overall status is
-implemented-unverified; an earlier development storage pass is not release proof.
-Projects 4–12 remain roadmap entries. Read the active project
-instructions and reconcile its provider state before creating or cleaning resources.
+Toolkit, fleet automation and network/storage have completed bounded cores and
+verified v0.1.0 releases. The containerized service platform is the only active
+engineering project, beginning with acceptance/dependency review. Projects 5–12
+remain roadmap entries. Read the active project's instructions and reconcile
+owned runtime state before creating or cleaning resources.
 
 Commands: use `make help` for the repository's supported task interface. Required
 hub gates are documentation/reference checks, configuration checks, staged-file

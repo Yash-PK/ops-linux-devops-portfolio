@@ -53,8 +53,8 @@ is verified published at `0d164e9158eeb9540e895d5f48bcf4723f36667b`, with
 It is neither a draft nor a prerelease. The original local and Linux reports remain
 tied to their earlier recorded source revisions.
 No default toolkit command remediates or changes host configuration. The first
-milestone is complete. Two engineering cores are now complete; the network/storage
-lab is the only active project, with implementation undergoing required validation.
+milestone is complete. Three engineering cores are now complete; the containerized service platform
+is the only active project, beginning with acceptance and dependency review.
 
 ## Milestone 2: disposable operating-system labs
 
@@ -87,7 +87,7 @@ is verified at `1531b86b54eee87d01da83f7b55d7d405f43fadb` with
 The original reports retain their source identities. Debian, Rocky and other
 providers remain separate unverified alternatives; no cloud deployment is claimed.
 
-**3. `ops-network-storage-services-lab` (active; implemented-unverified overall).**
+**3. `ops-network-storage-services-lab` (completed bounded core; integration-tested).**
 The local sibling repository implements a real Ubuntu 24.04 ARM64 VM using the
 released fleet provider, pinned at `1531b86b54eee87d01da83f7b55d7d405f43fadb` and
 verified by source-file SHA256. Lima VZ is the supported macOS ARM64 provider. Private
@@ -104,17 +104,16 @@ The standalone bootstrap pins the provider, image and 41 packages from an Ubuntu
 snapshot; preparation is followed by authenticated reboot and exact running-kernel
 verification. Initial budget is one 2-CPU, 2-GiB VM with a 24-GiB sparse root disk.
 
-The current uncommitted implementation passed 120 controller/guest-safety fixture
-tests, required lint and the safe demo. An earlier development storage run passed
-438 commands and 63 assertions with profile cleanup and VM deletion; subsequent
-kernel/library pinning invalidates its use as current-code release proof. Network
-development validation is in progress. Required completion remains a clean-source
-all-profile VM run, controller/clean-clone evidence, outgoing/security review,
-verified publication and exact-target CI. No project 3 remote or release exists.
+The core passed 122 controller tests, required lint, the safe demo, full secret
+scans, standalone clean-clone checks and formal all-profile VM integration (605
+commands, 110 assertions and owned cleanup) at source `e43bcdfdae1a604a095eea085e81eb8fbe2e6d00`.
+Its [v0.1.0 release](https://github.com/Yash-PK/ops-network-storage-services-lab/releases/tag/v0.1.0) is verified at
+`53b78f81ed58602efd2c151d449338615ab61e9d`, with [passing exact-target CI](https://github.com/Yash-PK/ops-network-storage-services-lab/actions/runs/37735444827).
+Earlier development failures remain documented; they were never relabeled as pass.
 
 ## Milestone 3: reference workload and delivery
 
-**4. `ops-containerized-service-platform` (planned).** The common reference
+**4. `ops-containerized-service-platform` (active acceptance/dependency review; capabilities planned).** The common reference
 workload is an asynchronous jobs service: API accepts a synthetic job, a worker
 executes it, PostgreSQL stores durable state, a maintained compatible Redis/Valkey
 implementation supports queue/cache needs, and a reverse proxy exposes the API.

@@ -22,7 +22,7 @@ passed for that exact target; it does not replace the earlier evidence revisions
 This hub is a published work-in-progress index. Its local, clean-clone and
 [hosted CI gates](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426) passed
 at hub revision `cd9a6741e3d6d54e3cd39fff18d1f40359bf5313`.
-Two of twelve engineering cores are complete, with three public repositories
+Three of twelve engineering cores are complete, with four public repositories
 including this hub. The [fleet automation project](https://github.com/Yash-PK/ops-linux-fleet-automation)
 passed 74 controller tests, clean-clone checks, and both Ubuntu 24.04 and AlmaLinux
 9.8 ARM64 real-VM profiles. Each demonstrated strict SSH rejection, Molecule
@@ -32,16 +32,17 @@ verification before repair and scoped teardown. Its
 is verified at `1531b86b54eee87d01da83f7b55d7d405f43fadb`, with
 [passing exact-revision CI](https://github.com/Yash-PK/ops-linux-fleet-automation/actions/runs/37615270935).
 
-Ten engineering projects remain incomplete. The network/storage lab is the only
-active project, with six network profiles, four storage profiles and a guarded
-standalone controller implemented locally in `ops-network-storage-services-lab`.
-Its 120 fixture tests, required lint and safe controller demo passed on uncommitted
-source. An earlier real storage development run passed, including recovery and
-cleanup; a subsequent dependency/kernel update requires fresh integration.
-The overall project remains implemented-unverified, with no remote, CI run or
-release. Network development validation and formal all-profile evidence remain.
-Projects 4–12 remain roadmap entries. See [project status](PROJECT_STATUS.md) and
-the [evidence index](docs/evidence-index.md) for revision and environment boundaries.
+The [network/storage lab](https://github.com/Yash-PK/ops-network-storage-services-lab) is also complete, with a verified
+[v0.1.0 release](https://github.com/Yash-PK/ops-network-storage-services-lab/releases/tag/v0.1.0) at `53b78f81ed58602efd2c151d449338615ab61e9d`
+and [passing CI](https://github.com/Yash-PK/ops-network-storage-services-lab/actions/runs/37735444827). Its 122 controller tests, clean-clone quickstart and real
+Ubuntu ARM64 VM run passed. The VM recorded 605 commands and 110 assertions across
+network services, TLS, firewall recovery, filesystems, quotas, LVM, RAID recovery
+and LUKS, followed by owned cleanup.
+
+Nine engineering projects remain. The containerized service platform is the only
+active project, beginning with acceptance and dependency review. Projects 5–12
+remain roadmap entries. See [project status](PROJECT_STATUS.md) and the
+[evidence index](docs/evidence-index.md) for exact revision/environment boundaries.
 
 ## Start here
 
@@ -59,8 +60,8 @@ flowchart LR
     Hub[Portfolio hub: plan and evidence index]
     Toolkit[Linux operations toolkit]
     Fleet[Fleet automation: released core]
-    Network[Network/storage lab: implementation under validation]
-    Future[Projects 4–12: roadmap]
+    Network[Network/storage lab: released core]
+    Future[Container workload next; projects 5–12 roadmap]
     Evidence[Revision-linked validation records]
     Hub --> Toolkit
     Hub --> Fleet
@@ -159,10 +160,9 @@ checkouts were removed; its owned registry is empty. Approximately 1.05 GiB of
 image caches remains, alongside local tools and ignored private metadata/credentials.
 The fleet cleanup policy governs those resources. No cloud resources or host
 configuration changes are authorized.
-The active network/storage lab uses a separate owned VM registry. Its earlier
-storage and failed network development VMs were deleted; a fresh network
-diagnostic run is active in this snapshot. Inspect its owned state before allocation or
-teardown. Keys, disk images and diagnostic logs remain ignored and unpublished.
+The completed network/storage lab's VM registry is empty; formal guest cleanup and
+VM deletion passed. About 793 MiB of local tools, caches and private diagnostics
+remains ignored. The next project must use its own resource inventory.
 Do not delete project repositories or private ownership records as a cleanup
 shortcut.
 

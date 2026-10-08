@@ -24,10 +24,12 @@ publication and hosted CI are now verified at the recorded snapshot below.
 | F-Alma: complete fleet AlmaLinux profile | `e333e1c8c37b107fb6e99924c869555acca0ad68` | macOS ARM64 Lima VZ; AlmaLinux 9.8 ARM64, kernel `5.14.0-687.54.1.el9_8.aarch64`, guest Python 3.9.25 | All nine workflow steps passed, including SELinux/firewalld checks, patch/reboot and scoped teardown | [Actual AlmaLinux report](https://github.com/Yash-PK/ops-linux-fleet-automation/blob/1531b86b54eee87d01da83f7b55d7d405f43fadb/evidence/e333e1c8c37b-alma-vm.json) |
 | Fleet publishing clean clone and hosted controller CI | `627e25c38de2ef44f43416e171102eaae3bc20ca` | Temporary macOS clone / hosted Ubuntu controller | Required checks passed; scratch removed; preserved Linux artifact | [Clean-clone report](https://github.com/Yash-PK/ops-linux-fleet-automation/blob/1531b86b54eee87d01da83f7b55d7d405f43fadb/evidence/627e25c38de2-clean-clone.json); [Linux CI report](https://github.com/Yash-PK/ops-linux-fleet-automation/blob/1531b86b54eee87d01da83f7b55d7d405f43fadb/evidence/627e25c38de2-ci-linux.json) |
 | Fleet release v0.1.0 | `1531b86b54eee87d01da83f7b55d7d405f43fadb` | Verified public main and exact-target hosted CI | Non-draft, non-prerelease release published `2026-10-07T11:38:28Z`; CI passed | [CI run](https://github.com/Yash-PK/ops-linux-fleet-automation/actions/runs/37615270935); [release](https://github.com/Yash-PK/ops-linux-fleet-automation/releases/tag/v0.1.0) |
-| N-local: network/storage controller and fixtures | Uncommitted source; no formal tested Git revision yet | macOS ARM64, Python 3.14.7 | 120 tests, Ruff/ShellCheck/shfmt/actionlint, docs and safe demo passed; formal report/clean clone pending | Local `ops-network-storage-services-lab/tests/` and documented session observations; no hosted CI |
-| N-storage-dev: earlier complete storage development profile | `uncommitted`; SHA-256 `cb7df988b7260c318f24f38db86a2e334f9b8f0ad773017abf977cb0a3a9b1a6` | Real Ubuntu ARM64 Lima VZ guest; 2026-10-08 05:10:20–05:11:45 UTC | 438 commands, 63 assertions, all storage profiles and cleanup passed; subsequent package/kernel changes require fresh integration | Local ignored `.runtime/reports/uncommitted-storage-vm-20261008T051145.json`; development-only, not public release evidence |
-| Network/storage current complete integration | None yet | Revised pinned packages/reboot and network profiles under development validation | Overall implemented-unverified; no formal all-profile, clean-clone, publication or CI pass credited | No remote or release |
-| Projects 4–12 | None | Roadmap | planned | None |
+| N-local: network/storage controller | `a9950a19f7fe578c9e27b4cf59e0a1ebafdbd8ac` | macOS ARM64, Python 3.14.7 | 122 tests, required lint, doctor/demo and full secret scans passed | [Controller report](https://github.com/Yash-PK/ops-network-storage-services-lab/blob/53b78f81ed58602efd2c151d449338615ab61e9d/evidence/a9950a19f7fe-controller.json) |
+| N-storage-dev: earlier complete storage development profile | `uncommitted`; SHA-256 `cb7df988b7260c318f24f38db86a2e334f9b8f0ad773017abf977cb0a3a9b1a6` | Real Ubuntu ARM64 Lima VZ guest; 2026-10-08 05:10:20–05:11:45 UTC | 438 commands, 63 assertions, all storage profiles and cleanup passed; subsequent package/kernel changes required fresh integration | Local ignored `.runtime/reports/uncommitted-storage-vm-20261008T051145.json`; development-only, not public release evidence |
+| N-VM: network/storage complete integration and standalone clone | `e43bcdfdae1a604a095eea085e81eb8fbe2e6d00` | macOS ARM64 VZ; Ubuntu 24.04 ARM64, kernel `6.8.0-146-generic`; Python 3.14.7 controller | 605 commands, 110 assertions and cleanup passed; fresh clone gates passed and scratch removed | [VM report](https://github.com/Yash-PK/ops-network-storage-services-lab/blob/53b78f81ed58602efd2c151d449338615ab61e9d/evidence/e43bcdfdae1a-all-vm.json), [clone report](https://github.com/Yash-PK/ops-network-storage-services-lab/blob/53b78f81ed58602efd2c151d449338615ab61e9d/evidence/e43bcdfdae1a-clean-clone.json) |
+| N-CI and release v0.1.0 | CI artifact: `0f6f5faebc0c3d2e381a66fcaaa656e3e75ccaaa`; release: `53b78f81ed58602efd2c151d449338615ab61e9d` | Hosted Linux x86-64 controller; verified public main/tag | Original and release-target CI passed; release published 2026-10-08T06:03:14Z | [Preserved Linux report](https://github.com/Yash-PK/ops-network-storage-services-lab/blob/53b78f81ed58602efd2c151d449338615ab61e9d/evidence/0f6f5faebc0c-ci-linux.json), [release-target CI](https://github.com/Yash-PK/ops-network-storage-services-lab/actions/runs/37735444827), [release](https://github.com/Yash-PK/ops-network-storage-services-lab/releases/tag/v0.1.0) |
+| Project 4 | None yet | Active acceptance/dependency review | planned | No remote |
+| Projects 5–12 | None | Roadmap | planned | None |
 
 The actual Linux report was produced by the CI run linked above. Its artifact is
 the source of the local evidence copy; a subsequent evidence/documentation commit
@@ -97,15 +99,16 @@ verification. Approximately 1.05 GiB of image caches, local tools and ignored
 private metadata/credentials were retained. Hosted Linux controller validation
 is distinct from macOS VZ integration. Neither proves additional distros/providers,
 external network denial, multi-host availability or cloud deployment. The active
-network/storage work now has source and fixture checks; its separate development
-storage observation does not extend the completed fleet's integration claims.
+network/storage formal proof is independent of the fleet proof; neither extends
+the other project's claimed platforms.
 
 ## Network/storage development boundary
 
 The local repository is `ops-network-storage-services-lab`. It implements a
 standalone controller using the hash-pinned released fleet provider, a real
 Ubuntu ARM64 Lima VZ guest, private namespace clients and inventoried loop-backed
-image files. Network and storage source exist; no remote URL is claimed.
+image files. The current released repository and formal evidence are linked above. The observations
+below preserve the earlier development history; they do not substitute for that proof.
 
 The earlier successful storage development run recorded fingerprint
 `cb7df988b7260c318f24f38db86a2e334f9b8f0ad773017abf977cb0a3a9b1a6`,
@@ -120,18 +123,17 @@ a tested Git commit or a published release.
 
 Subsequent review tightened library/kernel dependencies to 41 snapshot package
 pins and separated preparation from authenticated reboot/profile execution.
-Current code requires running kernel `6.8.0-146-generic`. The old storage pass
-cannot prove this changed implementation. Current network validation is active;
-the `053143` network development run passed DNS/DHCP/routing/NFS and then failed
-Samba startup (exit 255). Its outer VM deletion passed. A fresh diagnostic run is
-active; no complete network/all-profile pass is credited. Inspect actual owned
-provider state before further operations.
+Current code requires running kernel `6.8.0-146-generic`. A later formal all-profile
+run at `e43bcdfdae1a604a095eea085e81eb8fbe2e6d00` passed this requirement and all
+core assertions. Its fingerprint is
+`0ddbae1dd5d52f9c6100f22910535571e189e49c29411f950731b4852bfea593`.
 
-The release-proof gate requires clean committed current-code evidence for all
-profiles, exact package/kernel versions, preserved preparation observations,
-authenticated reboot, every command/core assertion and owned teardown. Controller
-fixture tests do not satisfy that real-VM requirement. Formal source, clean-clone,
-all-profile integration, outgoing security review and hosted CI are still pending.
+Development also found an oversized payload, partition-input error, Samba runtime
+directory dependency and overly restrictive loopback firewall rule. Each failed
+attempt remains described in the released validation report. The complete formal
+run, not any earlier partial/development observation, qualifies the released core.
+Its guest resources, VM and temporary clone were removed; local private caches and
+diagnostics remain ignored. Cloud deployment and image publication remain disabled.
 
 ## Evidence handling
 
@@ -161,4 +163,9 @@ A later hub-only snapshot was verified at
 `cd9a6741e3d6d54e3cd39fff18d1f40359bf5313`, with
 [passing exact-target CI](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426).
 It records index maintenance, not a replacement for original local/clone reports
-or proof that the active network/storage implementation passed integration.
+or a replacement for the later formal network/storage integration proof.
+
+Hub progress snapshot `e6bd08197a96f5f7ee4dc9b35b72ef1007792f0d` passed
+[exact-target CI](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37734298497).
+Its clean-clone source is `08a5cadecf05de18802e8c68643c4bdc78e8a6d2`, recorded in
+[the preserved report](../evidence/08a5cadecf05-clean-clone.json).

@@ -2,18 +2,18 @@
 
 Capability, publication, CI and release state are independent. This portfolio is
 lab/reference engineering work. The [evidence index](docs/evidence-index.md)
-identifies the exact source revisions and execution environments. Two of twelve
-engineering cores are complete; the hub makes three verified public repositories.
-Ten engineering projects remain incomplete, with network/storage implementation
-under active validation.
+identifies the exact source revisions and execution environments. Three of twelve
+engineering cores are complete; the hub makes four verified public repositories.
+Nine engineering projects remain. The containerized service platform is the only
+active engineering project, beginning with acceptance and dependency review.
 
 | Project | Work state | Capability state | Publication | CI | Release |
 | --- | --- | --- | --- | --- | --- |
 | Portfolio hub | First milestone complete; supporting index | statically-validated; original local/clone source `850a33de075c` | [Public hub](https://github.com/Yash-PK/ops-linux-devops-portfolio) verified at `cd9a6741e3d6` | [Passed for `cd9a6741e3d6`](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426) | Work-in-progress index; no release intended |
 | Linux operations toolkit | Bounded core complete; no longer active | integration-tested on Ubuntu x86-64 CI | Public repository; release target `0d164e9158ee` | Passed for `0d164e9158ee` | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0) |
 | Linux fleet automation | Bounded core complete; no longer active | integration-tested on Ubuntu and AlmaLinux ARM64 VMs | [Public repository](https://github.com/Yash-PK/ops-linux-fleet-automation); target `1531b86b54ee` | [Passed for `1531b86b54ee`](https://github.com/Yash-PK/ops-linux-fleet-automation/actions/runs/37615270935) | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-fleet-automation/releases/tag/v0.1.0) |
-| Network/storage services lab | Only active engineering project; local source and fixtures implemented | implemented-unverified overall; controller statically validated | Not created | Not run | None |
-| Containerized service platform | Not started | planned | Not created | Not run | None |
+| Network/storage services lab | Bounded core complete | integration-tested on Ubuntu ARM64 VZ | [Public repository](https://github.com/Yash-PK/ops-network-storage-services-lab); target `53b78f81ed58` | [Passed](https://github.com/Yash-PK/ops-network-storage-services-lab/actions/runs/37735444827) | [v0.1.0](https://github.com/Yash-PK/ops-network-storage-services-lab/releases/tag/v0.1.0) |
+| Containerized service platform | Only active project; acceptance and dependency review | planned | Not created | Not run | None |
 | Cloud foundation IaC | Not started | planned | Not created | Not run | None |
 | Delivery pipelines | Not started | planned | Not created | Not run | None |
 | Kubernetes/GitOps platform | Not started | planned | Not created | Not run | None |
@@ -71,7 +71,7 @@ container or cloud deployment.
 Gitleaks found no findings in the required outgoing working/staged/history scans.
 Pattern scanning does not guarantee absence of every secret. Secret scanning,
 push protection and private vulnerability reporting were verified enabled for
-all three public repositories without adding a paid service. No account-wide settings were changed.
+all four public repositories without adding a paid service. No account-wide settings were changed.
 
 Toolkit temporary clones and integration files, including the ephemeral certificate
 key, were cleaned. The hub clean-clone gate passed and removed its scratch checkout. Ignored local developer caches (`.venv`, `.tools`) remain for repeat
@@ -107,7 +107,7 @@ Changed artifacts in this milestone include the toolkit source/tests/CI/runbooks
 the hub's plan, ledger, matrix, dependency/evidence indexes, and revision-linked
 reports. Commits describe those actual implementation and verification steps;
 no author identity, activity or results were fabricated. Inspect completed working
-trees on resumption. [NEXT_STEPS.md](NEXT_STEPS.md) records the active network/storage
+trees on resumption. [NEXT_STEPS.md](NEXT_STEPS.md) records the active container platform
 validation work.
 
 ## Completed fleet core
@@ -142,48 +142,38 @@ corrected unit boot ordering passed a fresh Ubuntu run; no failed result was
 converted into a pass. Other distros/providers, external network-denial tests,
 multi-host availability and cloud deployment are outside the demonstrated core.
 
-## Active continuation — network/storage services lab
+## Completed network/storage core
 
-Project 3 is the only active engineering project. Source exists locally at
-`/Users/hbsu/ops-network-storage-services-lab`; overall status is
-**implemented-unverified**. No remote, GitHub CI run or release exists. Its bounded
-acceptance was defined before implementation. Projects 4–12 remain roadmap entries.
+The [public repository](https://github.com/Yash-PK/ops-network-storage-services-lab) and [v0.1.0 release](https://github.com/Yash-PK/ops-network-storage-services-lab/releases/tag/v0.1.0)
+are verified at `53b78f81ed58602efd2c151d449338615ab61e9d`, with [passing exact-target CI](https://github.com/Yash-PK/ops-network-storage-services-lab/actions/runs/37735444827).
+Controller source `a9950a19f7fe578c9e27b4cf59e0a1ebafdbd8ac` passed 122 tests,
+required lint, safe demo and working/staged/full-history secret scans. Clean-clone
+and real VM evidence belong to `e43bcdfdae1a604a095eea085e81eb8fbe2e6d00` and fingerprint
+`0ddbae1dd5d52f9c6100f22910535571e189e49c29411f950731b4852bfea593`; later documentation/evidence commits do not replace them.
 
-The implementation uses a hash-pinned released fleet provider and local Lima VZ
-to provision one Ubuntu ARM64 VM, with guest-private namespace clients and owned
-loop-backed image files. It implements six network profiles (DNS, DHCP, NFS,
-Samba, TLS reverse proxy/load balancing, firewall/failure/capture) and four storage
-profiles (filesystems/fstab/quotas, LVM expansion, RAID recovery and LUKS).
-Its standalone bootstrap pins 41 Ubuntu snapshot packages; the controller separates
-preparation, authenticated reboot and profile execution, requiring the exact locked
-running kernel and retained AppArmor. No host mounts or host configuration changes
-are part of this design.
+The Ubuntu 24.04 ARM64 VZ run passed 605 commands and 110 assertions: private
+VLANs/routing, DNS/DHCP, NFS, encrypted SMB3 with anonymous rejection, two TLS proxy
+backends with trust/hostname rejection, firewall denial/recovery and bounded
+capture; GPT/ext4/XFS/fstab/quotas, LVM expansion, RAID degradation/rebuild and
+LUKS rejection/reopen. It verified 41 selected snapshot package pins, authenticated
+cold boot into `6.8.0-146-generic`, retained AppArmor, guest cleanup and VM deletion.
+Namespaces are clients within one VM; loop images are not physical-disk evidence.
 
-The uncommitted implementation passed 120 fixture tests, Ruff, ShellCheck, shfmt,
-actionlint, documentation checks and the safe dry-run/invalid-input demo. These
-establish controller/static behavior only. No formal tested Git revision exists.
-An earlier real storage development run passed 438 commands and 63 assertions,
-including GPT/ext4/XFS persistence, quota EDQUOT/recovery, LVM growth, RAID1
-degradation/rebuild, LUKS rejection/reopen and scoped cleanup. Its source was
-uncommitted and subsequent kernel/library pinning requires a fresh run; this is
-not current-code release proof. The [evidence index](docs/evidence-index.md)
-retains its exact fingerprint and development boundary.
+The temporary clone and VM were removed; the owned registry is empty. About
+793 MiB of local tools, caches and ignored private metadata remains. Earlier
+uncommitted failures and development passes remain documented as development only.
+Secret scans found no matches; selected dependency review is not a full image or
+transitive vulnerability audit. No cloud resources or container packages were published.
 
-Network development validation is active; no successful network or all-profile
-integration is credited in this snapshot. The earlier storage VM was deleted.
-The completed `053143` development run passed package/kernel, VLAN/routing, DNS,
-DHCP and NFS checks, then failed Samba startup. Its VM deletion passed. A fresh
-diagnostic run is in progress; inspect owned provider state before allocation
-or cleanup. Its ignored tools,
-image caches, runtime credentials and private diagnostics must remain unpublished.
+## Active continuation — containerized service platform
 
-Next: resolve actual network VM failures, run fresh development profiles after any
-fixes, review/commit source, collect formal all-profile VM and controller/clean-clone
-evidence, then complete outgoing security/publishing gates and exact-head CI before
-release. No cloud deployment or container-package publication has occurred.
+Project 4 is selected next. Define its bounded API/worker/PostgreSQL/cache/proxy
+acceptance before coding; verify dependencies, resource limits and the available
+container execution environment. Capabilities remain planned until implementation
+and appropriate evidence exist. Projects 5–12 remain roadmap entries; no remote
+repositories have been created for them. See [next steps](NEXT_STEPS.md).
 
-The latest separately verified hub publication/CI snapshot is
-`cd9a6741e3d6d54e3cd39fff18d1f40359bf5313`, with
-[passing exact-target CI](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426).
-It does not replace the original `850a33de075c` local/clone source or the archived
-`f1de5b4ee591` first-milestone hosted evidence.
+The latest verified hub snapshot before this update is
+`e6bd08197a96f5f7ee4dc9b35b72ef1007792f0d`, with
+[passing CI](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37734298497).
+Historical hub source and publication identities remain in the evidence index.
