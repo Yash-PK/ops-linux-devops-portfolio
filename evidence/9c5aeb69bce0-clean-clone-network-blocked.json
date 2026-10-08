@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "revision": "9c5aeb69bce0db5660fe62391049ffd5c1f8af0a",
+  "profile": "clean-clone",
+  "clean_at_start": true,
+  "network_required": "bootstrap downloads checksum/hash-locked tools",
+  "environment": {
+    "os": "Darwin",
+    "release": "25.6.0",
+    "architecture": "arm64",
+    "python": "3.14.7"
+  },
+  "started_at": "2026-10-08T04:51:45.054228+00:00",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "clone",
+        "--no-local",
+        "--",
+        "$SOURCE_REPO",
+        "$CLEAN_CLONE"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 120,
+      "duration_seconds": 0.045,
+      "output": "Cloning into '$CLEAN_CLONE'...\n"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 30,
+      "duration_seconds": 0.009,
+      "output": "9c5aeb69bce0db5660fe62391049ffd5c1f8af0a\n"
+    },
+    {
+      "argv": [
+        "make",
+        "PYTHON=/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "bootstrap"
+      ],
+      "exit_code": 2,
+      "timed_out": false,
+      "timeout_seconds": 900,
+      "duration_seconds": 9.386,
+      "output": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14 scripts/bootstrap.py\nWARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError(\"HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 8] nodename nor servname provided, or not known)\")': /simple/ruff/\nWARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError(\"HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 8] nodename nor servname provided, or not known)\")': /simple/ruff/\nWARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError(\"HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 8] nodename nor servname provided, or not known)\")': /simple/ruff/\nWARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError(\"HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 8] nodename nor servname provided, or not known)\")': /simple/ruff/\nWARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError(\"HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 8] nodename nor servname provided, or not known)\")': /simple/ruff/\nERROR: Could not find a version that satisfies the requirement ruff==0.16.10 (from versions: none)\nERROR: No matching distribution found for ruff==0.16.10\nTraceback (most recent call last):\n  File \"/private$CLEAN_CLONE/scripts/bootstrap.py\", line 84, in <module>\n    main()\n    ~~~~^^\n  File \"/private$CLEAN_CLONE/scripts/bootstrap.py\", line 24, in main\n    subprocess.run(\n    ~~~~~~~~~~~~~~^\n        [\n        ^\n    ...<11 lines>...\n        timeout=240,\n        ^^^^^^^^^^^^\n    )\n    ^\n  File \"/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py\", line 578, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['/private$CLEAN_CLONE/.venv/bin/python', '-m', 'pip', 'install', '--disable-pip-version-check', '--require-hashes', '--only-binary=:all:', '-r', '/private$CLEAN_CLONE/requirements-dev.lock']' returned non-zero exit status 1.\nmake[1]: *** [bootstrap] Error 1\n"
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "timeout_seconds": 30,
+      "duration_seconds": 0.017,
+      "output": ""
+    }
+  ],
+  "assertions": [
+    {
+      "name": "clone_revision_matches_source",
+      "passed": true
+    },
+    {
+      "name": "clone_remains_clean_after_checks",
+      "passed": true
+    }
+  ],
+  "not_run": [
+    "doctor",
+    "validate",
+    "demo",
+    "security"
+  ],
+  "temporary_clone_removed": true,
+  "finished_at": "2026-10-08T04:51:54.553212+00:00",
+  "passed": false
+}
