@@ -1,33 +1,41 @@
 # Next steps
 
-Three of twelve engineering cores are complete: operations toolkit, fleet automation
-and network/storage, each with a verified v0.1.0 release. The hub makes four public
-repositories. Nine engineering projects remain. **The containerized service
-platform is the only active project**, beginning with acceptance and dependency
-review; its capabilities are still planned. Projects 5–12 remain roadmap entries.
+Four of twelve engineering cores are complete: operations toolkit, fleet automation,
+network/storage and the containerized service platform, each with a verified
+v0.1.0 release. The hub makes five public repositories. Eight engineering projects
+remain. **Cloud foundation IaC is the only active project**; its capability is
+planned while dependency review and core definition begin. Projects 6–12 remain
+roadmap entries.
 
 ## Current bounded task
 
-1. Inspect only the next project path and relevant container/runtime metadata.
-   Do not start or modify an unrelated Docker/Colima environment. No global
-   packages or host configuration changes are authorized.
-2. Define the reference asynchronous jobs API/worker/PostgreSQL/cache/proxy core,
-   its acceptance checklist, resource limits and failure/recovery behavior before
-   coding. Verify maintained compatible dependencies and pin images/packages.
-3. Implement the application, migrations, deterministic synthetic seed data,
-   guarded local credentials, multi-stage containers and Compose readiness.
-   Keep publishing packages and cloud deployment disabled.
-4. Run unit/integration tests: a clean setup submits/completes a job, data survives
-   service restart, and dependency failure is bounded and recoverable. Exercise
-   real containers in a project-owned local environment; distinguish it from VM
-   and cloud proof. Rootless Podman remains a separate extension until tested.
-5. Finish documentation, CI, clean-clone and outgoing/security gates before creating
-   the new public repository. Verify exact-target CI before release. Keep one
-   active engineering project and do not create empty future remotes.
+1. Review official OpenTofu and AWS-provider support information, release notes,
+   security advisories and testing documentation. Choose compatible maintained
+   versions, verify downloads and record exact source references before adding
+   dependencies. Use OpenTofu as the primary engine; do not claim Terraform
+   compatibility without separate execution.
+2. Define the project-5 acceptance checklist and create its standalone local
+   repository without touching completed projects. Bound the AWS foundation to
+   networking/subnets/routes, security groups, IAM, encryption, tags, state design
+   and minimal compute configuration. Keep cost-bearing profiles disabled.
+3. Implement real modules and negative policy/module fixtures. Run formatting,
+   validation, applicable lint/policy checks and mock tests without credentials or
+   authenticated AWS operations. Distinguish each check from a real plan/apply;
+   exclude real state, saved plans and credentials from Git. Do not create cloud
+   resources, expose services or enable billable services.
+4. Document standalone bootstrap/quickstart, state/bootstrap/locking design and
+   gated deployment prerequisites. Run a clean-clone static/mock profile and
+   capture revision-linked evidence before publication. Project 5 currently has
+   no verified repository URL, implementation proof or CI result.
 
-No unresolved core, publication or release blocker remains for projects 1–3.
-Preserve their implementation and original evidence identities. The portfolio is
-lab/reference work; no cloud deployment or professional-experience claim is made.
+No unresolved required core, publication or release blocker remains for projects
+1–4. P4's [v0.1.0 release](https://github.com/Yash-PK/ops-containerized-service-platform/releases/tag/v0.1.0) and [exact-target CI](https://github.com/Yash-PK/ops-containerized-service-platform/actions/runs/37743579858)
+are verified at `cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe`. Its formal runtime source
+`3d58b9f7107f`, Linux artifact source `19ec88d5d4a6`, and earlier failed reports
+remain immutable. All owned P4 instances are deleted; approximately 977 MiB of
+ignored caches/tools remain. Do not restart the existing host Docker/Colima
+context, install global packages, publish images or provision cloud resources.
+Rootless Podman remains a planned extension.
 
 ## Completed demonstrations
 
@@ -72,6 +80,22 @@ owned VM and attempts scoped teardown. Check its registry before starting.
 [Published v0.1.0](https://github.com/Yash-PK/ops-network-storage-services-lab/releases/tag/v0.1.0)
 passed all profiles; development reports remain separate from release proof.
 
+Run the completed container platform's safe controller demonstration:
+
+```sh
+cd /Users/hbsu/ops-containerized-service-platform
+make doctor
+make validate
+make demo
+```
+
+Its real `make integration LAB=ops-container-platform-reference` requires the
+supported macOS ARM64 VZ environment, clean committed source and a new evidence
+path. It creates one owned 2-CPU/2-GiB VM with a 24-GiB sparse disk, runs the actual
+Compose lifecycle inside it and attempts scoped teardown. Existing formal reports
+cannot be overwritten. Read the released README before rerunning. The safe demo
+above creates no VM or container.
+
 Both recorded fleet guests were deleted and its provider registry is empty.
 Approximately 1.05 GiB of image caches remains, alongside tools and ignored
 metadata/credentials. Inspect owned state before any later teardown; do not remove private
@@ -85,10 +109,13 @@ ownership records or unrelated resources as a cleanup shortcut.
 | Toolkit released and CI-tested target | `0d164e9158eeb9540e895d5f48bcf4723f36667b` |
 | Hub original local/clean-clone source | `850a33de075cd5f43c4a1a30f4efa3830fea944d` |
 | Hub saved first-milestone publication/CI snapshot | `f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e` |
-| Hub latest verified publication/CI snapshot | `cd9a6741e3d6d54e3cd39fff18d1f40359bf5313` |
+| Hub latest verified publication/CI snapshot | `8b1154259f9a9f98ce8b725ca88a29d0da9be96c` |
 | Fleet controller/clean-clone/Ubuntu source | `c52155a5c15b04bdb2a85746b385da0243ecef93` |
 | Fleet AlmaLinux source | `e333e1c8c37b107fb6e99924c869555acca0ad68` |
 | Fleet released and CI-tested target | `1531b86b54eee87d01da83f7b55d7d405f43fadb` |
+| Container formal controller/clone/VM source | `3d58b9f7107fa1c7de3eec06b32c9b6f6ce644d6` |
+| Container preserved Linux controller artifact | `19ec88d5d4a6aa7541e7722b994618c3a6929cc5` |
+| Container released and CI-tested target | `cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe` |
 
 Both fleet VM reports share implementation fingerprint
 `391a99a45747322a4358e199d1454d2b29f175e171592995cae890761137bb0d`.

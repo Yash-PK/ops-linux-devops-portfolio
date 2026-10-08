@@ -53,8 +53,8 @@ is verified published at `0d164e9158eeb9540e895d5f48bcf4723f36667b`, with
 It is neither a draft nor a prerelease. The original local and Linux reports remain
 tied to their earlier recorded source revisions.
 No default toolkit command remediates or changes host configuration. The first
-milestone is complete. Three engineering cores are now complete; the containerized service platform
-is the only active project, beginning with acceptance and dependency review.
+milestone is complete. Four engineering cores now have verified v0.1.0 releases.
+Cloud foundation IaC is the only active project, beginning a static/mock core.
 
 ## Milestone 2: disposable operating-system labs
 
@@ -113,20 +113,45 @@ Earlier development failures remain documented; they were never relabeled as pas
 
 ## Milestone 3: reference workload and delivery
 
-**4. `ops-containerized-service-platform` (active acceptance/dependency review; capabilities planned).** The common reference
-workload is an asynchronous jobs service: API accepts a synthetic job, a worker
-executes it, PostgreSQL stores durable state, a maintained compatible Redis/Valkey
-implementation supports queue/cache needs, and a reverse proxy exposes the API.
-Select one queue/cache implementation after compatibility research. Include
-migrations, deterministic seeds, tests, multi-stage non-root images, readiness,
-signal handling, resource settings, localhost administrative binds, and persistent
-volumes. Generate ignored local credentials at runtime. Core acceptance: submit
-and complete a job from clean setup; retain data after restart; handle one
-dependency outage predictably; pass unit/integration tests. Rootless Podman is a
-separately tested extension. Publish no container packages under current flags.
+**4. `ops-containerized-service-platform` (core complete; integration-tested, v0.1.0 released).**
+The local common reference workload implements bounded asynchronous text analysis:
+a Python API accepts an idempotent synthetic job, PostgreSQL commits durable
+state, and a separate worker claims a leased row and fences completion. Valkey
+caches terminal results only; nginx proxies HTTP. The acceptance checklist
+preceded implementation. Source includes numbered checksum-verified migrations,
+repeatable seeds, input/failure/safety tests, hash-locked Python dependencies,
+digest-pinned multi-stage container images, Compose readiness and resource limits,
+non-root application identities, generated ignored credentials and a data volume.
 
-**5. `ops-cloud-foundation-iac` (planned).** Select Terraform or OpenTofu as the
-primary engine, then verify supported versions/providers. AWS core modules cover
+A guarded standalone runner pins the released fleet-provider component and
+allocates a separate Ubuntu ARM64 VZ guest for Docker 29.8.2/Compose 5.6.0/Buildx
+0.38.0. It uses 2 CPUs, 2 GiB RAM and a 24 GiB sparse disk, no host mounts and
+no forwarded application ports; the client uses guest loopback. Formal source
+`950e511f42173c00994496265bb48104623e1bea` passed 57 controller tests, required
+lint/docs/config, doctor/demo, secret scans and standalone clean-clone checks.
+Four development runs remain failed overall, although the fourth exercised
+workload/recovery behavior and 21 real SQL assertions before process inspection
+failed. The first formal VM attempt failed an oversized multiplexed SSH request
+before guest phases; all those VMs were deleted. Current source
+`3d58b9f7107fa1c7de3eec06b32c9b6f6ce644d6` adds bounded chunk transfer with 71
+passing tests in its formal controller report. Its standalone clone and complete
+formal VM run passed: 139 commands, 94 preparation/lifecycle assertions, 21 nested
+SQL assertions and owned cleanup. This later report establishes asynchronous
+completion, restart persistence, cache/database outage recovery, SQL semantics,
+observed runtime settings and cleanup; earlier failed attempts stay failed.
+
+The [public repository](https://github.com/Yash-PK/ops-containerized-service-platform) is verified at
+`cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe`, matching the [v0.1.0 release](https://github.com/Yash-PK/ops-containerized-service-platform/releases/tag/v0.1.0),
+with [passing exact-target CI](https://github.com/Yash-PK/ops-containerized-service-platform/actions/runs/37743579858). The preserved Linux controller
+artifact retains source `19ec88d5d4a6` and the same implementation fingerprint.
+P4 is complete and no longer active; no required core gate remains unresolved.
+Rootless Podman is a separate planned extension. Publish no container packages
+and provision no cloud resources under current flags.
+
+**5. `ops-cloud-foundation-iac` (active; capability planned).** Begin official
+support/release/advisory review for OpenTofu and the AWS provider before choosing
+exact versions. OpenTofu is the primary engine; Terraform compatibility is not
+claimed without separate tests. Define acceptance before implementation. Planned AWS core modules cover
 VPC/subnets/routes, security groups, least-privilege IAM, encryption, tags,
 state/bootstrap design, and minimal compute configuration. Core acceptance is
 offline/static only: formatting, validation, lint, policy checks, and module mocks;

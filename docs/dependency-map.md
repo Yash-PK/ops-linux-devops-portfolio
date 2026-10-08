@@ -3,8 +3,9 @@
 Repository order follows operational dependencies and keeps one engineering
 project active. Hub upkeep supports the active project and does not create another
 implementation workstream. This diagram describes the plan; the first
-three engineering cores are complete. The containerized service platform is the
-only active engineering project, beginning with acceptance and dependency review.
+four engineering cores have verified releases. Cloud foundation IaC is the only
+active engineering project, beginning dependency review and a local OpenTofu/AWS
+static/mock core. Cloud execution remains disabled.
 
 ```mermaid
 flowchart TD
@@ -35,6 +36,7 @@ acceptance checklist and a supported execution environment first.
 | --- | --- | --- |
 | Fleet and network/storage labs | Operations toolkit checks, when used | Pin a tested toolkit release; never depend on an untracked sibling checkout. |
 | Network/storage lab | Released fleet provider at `1531b86b54eee87d01da83f7b55d7d405f43fadb` | `component.lock.json` pins the provider source and license hashes; standalone bootstrap downloads and verifies it; each checkout owns separate provider state. No sibling import. |
+| Container platform | Same released fleet-provider component, pinned images/engine/runtime packages | Standalone locks and hash checks; a separate owned VZ inventory and guest engine. Existing host Docker/Colima contexts are not adopted. The formal ARM64 VM/Compose lifecycle passed at `3d58b9f7107f`; v0.1.0 and exact-target CI are verified at `cdea68d2a446`. |
 | Delivery | Reference app source, tests, build definition | Pin app revision/release; core checks reproduce locally. |
 | Kubernetes | Reference app artifact/configuration and delivery contract | Pin immutable artifact digest once authorized to publish; otherwise document locally built image and source revision accurately. |
 | Observability | Reference app instrumentation and deployed workload | Pin compatible instrumentation and platform releases, with minimal and extended profiles. |
@@ -43,10 +45,21 @@ acceptance checklist and a supported execution environment first.
 | Golden path | Validated workload/platform/telemetry contracts | Generated services use explicit versioned dependencies, not original-account assumptions. |
 | Capstone | Completed, tested producer releases | A manifest pins each producer; scripts fetch or verify releases without copying codebases. |
 
-The reference workload will be an asynchronous synthetic jobs service with API,
-worker, PostgreSQL, queue/cache, and reverse proxy. Delivery, Kubernetes,
-observability, security, and recovery will exercise this common application.
-The application is planned, not implemented by this hub.
+The reference workload is implemented locally as an asynchronous synthetic
+text-analysis service: Python API and separate worker, PostgreSQL durable queue
+and job state, Valkey completed-result cache, and nginx. PostgreSQL is the source
+of truth; there is no separate cache-backed job queue. Formal local controller,
+clone and ARM64 VM/Compose validation passed at `3d58b9f7107f`. Its verified
+[v0.1.0 release](https://github.com/Yash-PK/ops-containerized-service-platform/releases/tag/v0.1.0) targets
+`cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe`. Delivery, Kubernetes, observability,
+security and recovery must pin this common application's tested revision. The hub
+contains only its ledger, never a copy or implicit sibling import.
+
+The container project pins Python 3.14.7, Psycopg 3.3.6, valkey-py 6.1.1,
+PostgreSQL 18.6, Valkey 9.1.2 and nginx 1.30.5 after official dependency review.
+Its owned ARM64 guest profile selects Docker 29.8.2, Compose 5.6.0 and Buildx
+0.38.0. These are implemented input locks, not proof that every image architecture
+or runtime profile has been exercised. Rootless Podman remains planned.
 
 The completed network/storage project also pins Lima VZ, an official Ubuntu ARM64
 image and 41 selected packages from snapshot `20261007T000000Z`. Its authenticated

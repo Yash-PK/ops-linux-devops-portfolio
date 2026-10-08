@@ -2,19 +2,20 @@
 
 Capability, publication, CI and release state are independent. This portfolio is
 lab/reference engineering work. The [evidence index](docs/evidence-index.md)
-identifies the exact source revisions and execution environments. Three of twelve
-engineering cores are complete; the hub makes four verified public repositories.
-Nine engineering projects remain. The containerized service platform is the only
-active engineering project, beginning with acceptance and dependency review.
+identifies the exact source revisions and execution environments. Four of twelve
+engineering cores have completed releases; the hub makes five verified public repositories.
+Eight engineering projects remain. Cloud foundation IaC is the only active
+engineering project, beginning dependency review and a static/mock OpenTofu/AWS
+core. Its capability remains planned. Cloud execution is disabled.
 
 | Project | Work state | Capability state | Publication | CI | Release |
 | --- | --- | --- | --- | --- | --- |
-| Portfolio hub | First milestone complete; supporting index | statically-validated; original local/clone source `850a33de075c` | [Public hub](https://github.com/Yash-PK/ops-linux-devops-portfolio) verified at `cd9a6741e3d6` | [Passed for `cd9a6741e3d6`](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426) | Work-in-progress index; no release intended |
+| Portfolio hub | First milestone complete; supporting index | statically-validated; original local/clone source `850a33de075c` | [Public hub](https://github.com/Yash-PK/ops-linux-devops-portfolio) verified at `8b1154259f9a` | [Passed for `8b1154259f9a`](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37736216993) | Work-in-progress index; no release intended |
 | Linux operations toolkit | Bounded core complete; no longer active | integration-tested on Ubuntu x86-64 CI | Public repository; release target `0d164e9158ee` | Passed for `0d164e9158ee` | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0) |
 | Linux fleet automation | Bounded core complete; no longer active | integration-tested on Ubuntu and AlmaLinux ARM64 VMs | [Public repository](https://github.com/Yash-PK/ops-linux-fleet-automation); target `1531b86b54ee` | [Passed for `1531b86b54ee`](https://github.com/Yash-PK/ops-linux-fleet-automation/actions/runs/37615270935) | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-fleet-automation/releases/tag/v0.1.0) |
 | Network/storage services lab | Bounded core complete | integration-tested on Ubuntu ARM64 VZ | [Public repository](https://github.com/Yash-PK/ops-network-storage-services-lab); target `53b78f81ed58` | [Passed](https://github.com/Yash-PK/ops-network-storage-services-lab/actions/runs/37735444827) | [v0.1.0](https://github.com/Yash-PK/ops-network-storage-services-lab/releases/tag/v0.1.0) |
-| Containerized service platform | Only active project; acceptance and dependency review | planned | Not created | Not run | None |
-| Cloud foundation IaC | Not started | planned | Not created | Not run | None |
+| Containerized service platform | Bounded core complete; no longer active | integration-tested on Ubuntu ARM64 VZ/Compose | [Public repository](https://github.com/Yash-PK/ops-containerized-service-platform); target `cdea68d2a446` | [Passed for `cdea68d2a446`](https://github.com/Yash-PK/ops-containerized-service-platform/actions/runs/37743579858) | [v0.1.0](https://github.com/Yash-PK/ops-containerized-service-platform/releases/tag/v0.1.0) |
+| Cloud foundation IaC | Only active project; dependency review and core definition starting | planned | Not created | Not run | None |
 | Delivery pipelines | Not started | planned | Not created | Not run | None |
 | Kubernetes/GitOps platform | Not started | planned | Not created | Not run | None |
 | Observability/SRE lab | Not started | planned | Not created | Not run | None |
@@ -71,7 +72,7 @@ container or cloud deployment.
 Gitleaks found no findings in the required outgoing working/staged/history scans.
 Pattern scanning does not guarantee absence of every secret. Secret scanning,
 push protection and private vulnerability reporting were verified enabled for
-all four public repositories without adding a paid service. No account-wide settings were changed.
+all five public repositories without adding a paid service. No account-wide settings were changed.
 
 Toolkit temporary clones and integration files, including the ephemeral certificate
 key, were cleaned. The hub clean-clone gate passed and removed its scratch checkout. Ignored local developer caches (`.venv`, `.tools`) remain for repeat
@@ -165,15 +166,93 @@ uncommitted failures and development passes remain documented as development onl
 Secret scans found no matches; selected dependency review is not a full image or
 transitive vulnerability audit. No cloud resources or container packages were published.
 
-## Active continuation — containerized service platform
+## Completed containerized service platform core
 
-Project 4 is selected next. Define its bounded API/worker/PostgreSQL/cache/proxy
-acceptance before coding; verify dependencies, resource limits and the available
-container execution environment. Capabilities remain planned until implementation
-and appropriate evidence exist. Projects 5–12 remain roadmap entries; no remote
-repositories have been created for them. See [next steps](NEXT_STEPS.md).
+Project 4 exists locally at `/Users/hbsu/ops-containerized-service-platform`.
+Its bounded acceptance was recorded before implementation. Source implements a
+Python HTTP API and separate worker, PostgreSQL durable job state/lease fencing,
+idempotent requests, checksum-verified migrations and repeatable synthetic seeds.
+Valkey caches successful results only; nginx exposes the API. Digest-pinned
+multi-stage containers, Compose readiness/resource settings, fresh local
+credentials, a guarded VM runner, negative/safety tests and operational docs are
+present. Capability state is **integration-tested** for the recorded local ARM64
+VM/Compose environment. The [public repository](https://github.com/Yash-PK/ops-containerized-service-platform) is verified under
+`Yash-PK`, visibility `PUBLIC`, default branch `main`, at
+`cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe`, matching the verified
+[v0.1.0 tag and release](https://github.com/Yash-PK/ops-containerized-service-platform/releases/tag/v0.1.0). [Exact-target hosted CI](https://github.com/Yash-PK/ops-containerized-service-platform/actions/runs/37743579858)
+passed. The preserved [Linux controller artifact](https://github.com/Yash-PK/ops-containerized-service-platform/blob/cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe/evidence/19ec88d5d4a6-ci-linux.json)
+records `19ec88d5d4a6aa7541e7722b994618c3a6929cc5`: all 71 tests and the
+doctor/validate/demo/security groups passed on Linux x86-64 with Python 3.14.7.
+These evidence/docs commits do not replace the formal runtime source.
+
+Formal source `950e511f42173c00994496265bb48104623e1bea`, fingerprint
+`1058c9278fe1942b5becedbde4a5ffd312a846f18959af587ebe2e3615f3ad22`, passed
+doctor, lint/docs/configuration checks, all 57 unit/controller/safety tests,
+the safe demo and working/staged/full outgoing history secret scans. Its
+controller report confirms clean source at start and unchanged source at finish.
+The standalone clean clone also passed bootstrap, doctor, validation, demo and
+security; its temporary checkout was removed. Earlier controller evidence at
+`7766299b2d24` remains valid only for its original 45-test source revision.
+
+The first formal VM report for `950e511f4217` failed during SSH payload upload
+with exit 255 before guest phases; VM deletion passed. Its private transport log
+reported `mm_send_fd: sendmsg(2): Message too long` and file-descriptor handoff
+failure. The 54,532-byte encoded payload plus installer exceeded the multiplexed
+transport request's capacity despite fitting the application's former bound.
+This remains a failed formal attempt, not a container acceptance pass.
+
+Current source `3d58b9f7107fa1c7de3eec06b32c9b6f6ce644d6` implements validated
+chunks of at most 8,000 encoded bytes, a 16,000-byte shell-quoted command cap,
+staging ownership/sequence checks, part/whole checksums and interrupted-transfer
+cleanup. The formal controller report passed all 71 tests and required command groups,
+with clean/unchanged source and fingerprint
+`2d02d563e250b498d07b3695894a21d825bc7310c6ed47bd2afc3ee55b1a2f2b`. The fresh
+standalone clone passed all gates and was removed. The complete formal VM run
+passed from 07:14:49 to 07:20:20 UTC on 2026-10-08: 22 preparation commands and
+assertions, 117 Compose commands, 72 Compose assertions and 21 nested SQL
+assertions. Compose resources and the VM were removed; inventory is empty.
+Observed Python/Psycopg/libpq/valkey-py versions are 3.14.7/3.3.6/18.6/6.1.1.
+Preserve earlier evidence identities.
+
+All four earlier development runs remain failed overall with successful VM
+cleanup: private runtime-parent mode, engine startup, guest-loopback connection,
+and process inspection respectively. The fourth passed asynchronous jobs,
+restart persistence, cache/database outage recovery, API shutdown, repeatable
+migrations/seeds and all 21 real SQL assertions, then failed because `docker top`
+was invoked without the PID column it needs. Strict UID/PID parsing and realized
+port checks were implemented in `950e511f4217` and subsequently passed the
+complete `3d58b9f7107f` formal lifecycle. The original partial failures remain
+failed and are not substituted for that later complete evidence.
+
+The runner uses an owned Ubuntu ARM64 VZ VM with Docker 29.8.2, Compose 5.6.0 and
+Buildx 0.38.0. Only nginx joins the normal edge bridge for guest-loopback publishing;
+frontend/backend remain internal. No host Colima context is adopted. Local publishing
+gates, hosted CI and release verification passed, and the working tree was clean.
+Configured-only hardening fields and worker graceful-exit verification remain
+explicitly outside the observed acceptance scope. A completed lab core does not
+claim those optional extensions or production readiness.
+
+Private vulnerability reporting, dependency alerts, secret scanning and push
+protection were verified enabled for P4; no ruleset was changed. Owned instances
+are zero. Approximately 977 MiB remains ignored: 755 MiB in `.runtime`, 166 MiB
+in `.tools` and 56 MiB in `.venv`. These retained caches are not a cleanup blocker.
+
+Rootless Podman, other runtime providers and cloud execution remain unverified
+extensions. Preserve P4 source and immutable evidence while building the next core.
+
+## Active continuation — cloud foundation IaC
+
+Project 5 is the only active engineering project. Its next bounded task is official
+support/release/advisory review for OpenTofu and the AWS provider, then acceptance
+definition and a local static/mock AWS foundation. Capability is still **planned**;
+no implementation result, repository URL, hosted CI or deployment is claimed.
+Use OpenTofu as the primary engine and claim compatibility only with engines
+actually tested. Keep real state, plans and credentials out of Git, disable
+cost-bearing profiles, and provide no cloud apply or authenticated cloud operation
+under current authorization. Projects 6–12 remain roadmap entries.
+See [next steps](NEXT_STEPS.md) for the exact task.
 
 The latest verified hub snapshot before this update is
-`e6bd08197a96f5f7ee4dc9b35b72ef1007792f0d`, with
-[passing CI](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37734298497).
+`8b1154259f9a9f98ce8b725ca88a29d0da9be96c`, with
+[passing CI](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37736216993).
 Historical hub source and publication identities remain in the evidence index.

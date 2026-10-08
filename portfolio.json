@@ -22,14 +22,14 @@
       "verification": {
         "owner": "Yash-PK",
         "visibility": "PUBLIC",
-        "revision": "e6bd08197a96f5f7ee4dc9b35b72ef1007792f0d",
+        "revision": "8b1154259f9a9f98ce8b725ca88a29d0da9be96c",
         "default_branch": "main"
       }
     },
     "ci": {
       "state": "passed",
-      "revision": "e6bd08197a96f5f7ee4dc9b35b72ef1007792f0d",
-      "url": "https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37734298497"
+      "revision": "8b1154259f9a9f98ce8b725ca88a29d0da9be96c",
+      "url": "https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37736216993"
     }
   },
   "projects": [
@@ -164,6 +164,133 @@
     {
       "id": "containerized-service-platform",
       "repository": "ops-containerized-service-platform",
+      "active": false,
+      "capability_status": "integration-tested",
+      "publishing": {
+        "state": "published",
+        "verified": true,
+        "url": "https://github.com/Yash-PK/ops-containerized-service-platform",
+        "verification": {
+          "owner": "Yash-PK",
+          "visibility": "PUBLIC",
+          "revision": "cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe",
+          "default_branch": "main"
+        }
+      },
+      "ci": {
+        "state": "passed",
+        "revision": "cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe",
+        "url": "https://github.com/Yash-PK/ops-containerized-service-platform/actions/runs/37743579858",
+        "check": "validate"
+      },
+      "local_path": "../ops-containerized-service-platform",
+      "validation": {
+        "source_revision": "3d58b9f7107fa1c7de3eec06b32c9b6f6ce644d6",
+        "controller": "passed",
+        "fixture_tests_passed": 71,
+        "controller_report": "evidence/3d58b9f7107f-controller.json",
+        "clean_clone": "passed",
+        "compose_development": "four-failed-overall-attempts",
+        "formal_compose_vm": "passed",
+        "cleanup": "all-owned-vms-deleted-inventory-empty",
+        "qualifies_release": true,
+        "earlier_development": {
+          "development": true,
+          "revision": "uncommitted",
+          "code_sha256": "25aa04a2aa8bf80be1979195f9b7f3303d09683826edb2a07e47c2dfe24ddb64",
+          "report": ".runtime/evidence/20261008T063613637487-development.json",
+          "passed": false,
+          "package_preparation": "passed",
+          "cold_boot": "passed",
+          "failure": "runtime-parent-mode-0700-guard-before-credential-or-container-creation",
+          "vm_cleanup": "passed",
+          "qualifies_current_release": false
+        },
+        "clean_clone_report": "evidence/3d58b9f7107f-clean-clone.json",
+        "temporary_clone_removed": true,
+        "earlier_controller_source_revision": "7766299b2d24ce26fe6e51edf8b6660d3eb3e60b",
+        "formal_compose_report": "evidence/3d58b9f7107f-compose-vm.json",
+        "formal_vm_cleanup": "passed",
+        "later_development": [
+          {
+            "report": ".runtime/evidence/20261008T064105368194-development.json",
+            "source_revision": "7766299b2d24ce26fe6e51edf8b6660d3eb3e60b",
+            "passed": false,
+            "failure": "engine-start",
+            "vm_cleanup": "passed"
+          },
+          {
+            "report": ".runtime/evidence/20261008T064506703400-development.json",
+            "source_revision": "d4d180fd51a23d15462121ade3523fe053862dba",
+            "passed": false,
+            "failure": "first-guest-loopback-HTTP-connection-refused",
+            "vm_cleanup": "passed"
+          },
+          {
+            "report": ".runtime/evidence/20261008T065059048620-development.json",
+            "source_revision": "af50b84d648bc04cf63c6f103569bc2df033f4bc",
+            "passed": false,
+            "failure": "docker-top-requires-PID-column",
+            "workload_recovery_assertions": "passed",
+            "sql_assertions_passed": 21,
+            "compose_cleanup": "passed",
+            "vm_cleanup": "passed",
+            "qualifies_current_release": false
+          }
+        ],
+        "previous_formal_validation": {
+          "source_revision": "950e511f42173c00994496265bb48104623e1bea",
+          "code_sha256": "1058c9278fe1942b5becedbde4a5ffd312a846f18959af587ebe2e3615f3ad22",
+          "controller": "passed",
+          "fixture_tests_passed": 57,
+          "controller_report": "evidence/950e511f4217-controller.json",
+          "clean_clone": "passed",
+          "clean_clone_report": "evidence/950e511f4217-clean-clone.json",
+          "temporary_clone_removed": true,
+          "formal_compose_vm": "failed",
+          "formal_compose_report": "evidence/950e511f4217-compose-vm.json",
+          "formal_vm_cleanup": "passed"
+        },
+        "unit_controller_checks": "71-tests-passed-in-formal-controller-report",
+        "code_sha256": "2d02d563e250b498d07b3695894a21d825bc7310c6ed47bd2afc3ee55b1a2f2b",
+        "current_vm_upload": "passed",
+        "compose_cleanup": "passed",
+        "commands": 139,
+        "preparation_assertions": 22,
+        "compose_assertions": 72,
+        "sql_assertions": 21,
+        "local_core_passed": true,
+        "publication_gates": "passed-including-release-target-CI-and-verified-v0.1.0",
+        "started_at": "2026-10-08T07:14:49.280112+00:00",
+        "finished_at": "2026-10-08T07:20:20.844680+00:00",
+        "earlier_formal_failure": "Earlier950e511 report: oversized multiplexed SSH request observed in private diagnostics; bounded chunk transfer implemented in3d58b9f",
+        "retained_local_files": {
+          "runtime_mib": 755,
+          "tools_mib": 166,
+          "venv_mib": 56,
+          "approximate_total_mib": 977,
+          "owned_instances": 0
+        },
+        "ci_artifact_source_revision": "19ec88d5d4a6aa7541e7722b994618c3a6929cc5",
+        "ci_artifact_report": "evidence/19ec88d5d4a6-ci-linux.json"
+      },
+      "release": {
+        "state": "published",
+        "tag": "v0.1.0",
+        "revision": "cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe",
+        "url": "https://github.com/Yash-PK/ops-containerized-service-platform/releases/tag/v0.1.0"
+      },
+      "security_features": {
+        "private_vulnerability_reporting": "enabled",
+        "dependency_alerts": "enabled",
+        "secret_scanning": "enabled",
+        "secret_scanning_push_protection": "enabled",
+        "ruleset": "not-changed"
+      }
+    },
+    {
+      "id": "cloud-foundation-iac",
+      "repository": "ops-cloud-foundation-iac",
       "active": true,
       "capability_status": "planned",
       "publishing": {
@@ -175,23 +302,9 @@
       "ci": {
         "state": "not-run",
         "revision": null
-      }
-    },
-    {
-      "id": "cloud-foundation-iac",
-      "repository": "ops-cloud-foundation-iac",
-      "active": false,
-      "capability_status": "planned",
-      "publishing": {
-        "state": "not-created",
-        "verified": false,
-        "url": null,
-        "verification": null
       },
-      "ci": {
-        "state": "not-run",
-        "revision": null
-      }
+      "work_state": "dependency-review-and-bounded-core-definition",
+      "next_task": "Verify official OpenTofu/AWS-provider support, release notes and advisories; implement AWS static/mock foundation without cloud credentials, real state or apply."
     },
     {
       "id": "delivery-pipelines",

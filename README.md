@@ -22,7 +22,7 @@ passed for that exact target; it does not replace the earlier evidence revisions
 This hub is a published work-in-progress index. Its local, clean-clone and
 [hosted CI gates](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426) passed
 at hub revision `cd9a6741e3d6d54e3cd39fff18d1f40359bf5313`.
-Three of twelve engineering cores are complete, with four public repositories
+Four of twelve engineering cores have completed releases, with five public repositories
 including this hub. The [fleet automation project](https://github.com/Yash-PK/ops-linux-fleet-automation)
 passed 74 controller tests, clean-clone checks, and both Ubuntu 24.04 and AlmaLinux
 9.8 ARM64 real-VM profiles. Each demonstrated strict SSH rejection, Molecule
@@ -39,10 +39,24 @@ Ubuntu ARM64 VM run passed. The VM recorded 605 commands and 110 assertions acro
 network services, TLS, firewall recovery, filesystems, quotas, LVM, RAID recovery
 and LUKS, followed by owned cleanup.
 
-Nine engineering projects remain. The containerized service platform is the only
-active project, beginning with acceptance and dependency review. Projects 5–12
-remain roadmap entries. See [project status](PROJECT_STATUS.md) and the
-[evidence index](docs/evidence-index.md) for exact revision/environment boundaries.
+The [containerized service platform](https://github.com/Yash-PK/ops-containerized-service-platform) is complete.
+Its Python API/SQL worker, migrations/seeds, Valkey cache, nginx, Compose
+configuration and guarded VM runner passed the bounded core. Formal source
+`3d58b9f7107f` passed 71 controller tests, standalone clean-clone checks and real
+Compose integration: 139 commands, 94 preparation/lifecycle assertions and 21
+nested SQL assertions, with owned cleanup. Its [v0.1.0 release](https://github.com/Yash-PK/ops-containerized-service-platform/releases/tag/v0.1.0)
+is verified at `cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe`, with
+[passing exact-target CI](https://github.com/Yash-PK/ops-containerized-service-platform/actions/runs/37743579858). The preserved
+[Linux controller report](https://github.com/Yash-PK/ops-containerized-service-platform/blob/cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe/evidence/19ec88d5d4a6-ci-linux.json) retains its earlier
+`19ec88d5d4a6` source. Four development failures and an earlier formal SSH-upload
+failure remain recorded separately.
+
+Eight engineering projects remain. **Cloud foundation IaC is the only active
+project**, beginning official dependency review and a bounded OpenTofu/AWS
+static/mock foundation. Its capability remains planned; no authenticated cloud
+plan or resource creation is authorized. Projects 6–12 remain roadmap entries.
+See [project status](PROJECT_STATUS.md) and the [evidence index](docs/evidence-index.md)
+for exact revision/environment boundaries.
 
 ## Start here
 
@@ -61,11 +75,15 @@ flowchart LR
     Toolkit[Linux operations toolkit]
     Fleet[Fleet automation: released core]
     Network[Network/storage lab: released core]
-    Future[Container workload next; projects 5–12 roadmap]
+    Container[Container workload: released core]
+    Cloud[5 AWS IaC: active, static/mock scope]
+    Future[Projects 6–12 roadmap]
     Evidence[Revision-linked validation records]
     Hub --> Toolkit
     Hub --> Fleet
     Hub --> Network
+    Hub --> Container
+    Hub --> Cloud
     Fleet --> Evidence
     Hub -. planned .-> Future
     Toolkit --> Evidence
@@ -167,8 +185,10 @@ Do not delete project repositories or private ownership records as a cleanup
 shortcut.
 
 The [matrix](SKILLS_MATRIX.md) intentionally leaves unimplemented capabilities
-planned. Later projects add the asynchronous jobs reference workload, automation,
-platform delivery, telemetry, security, recovery, and a bounded incident
+planned. The asynchronous jobs reference workload is now implemented locally and
+has a verified release backed by formal local validation and exact-target CI. Later projects add
+platform delivery, telemetry,
+security, recovery, and a bounded incident
 simulation, in dependency order. Larger enterprise alternatives stay in the
 extension backlog until they can be implemented and tested meaningfully.
 

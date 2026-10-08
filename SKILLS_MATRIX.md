@@ -37,6 +37,22 @@ The original implementation fingerprint remains pinned in the evidence index.
 **N-CI** identifies the preserved Linux controller artifact at `0f6f5faebc0c`;
 the release target `53b78f81ed58602efd2c151d449338615ab61e9d` also passed exact-target CI.
 
+**C-local** identifies formal controller/clean-clone reports at
+`3d58b9f7107fa1c7de3eec06b32c9b6f6ce644d6`: 71 tests, doctor, lint/docs/config,
+safe demo and full outgoing secret scans passed; the temporary clone was removed.
+**C-dev** preserves four failed development runs; the fourth passed workload and
+21 SQL assertions before process inspection failed. **C-formal-failed** identifies
+the first formal VM attempt: oversized SSH request before guest phases, VM deleted.
+**C-VM** identifies the later complete formal run at
+`3d58b9f7107fa1c7de3eec06b32c9b6f6ce644d6`: 139 commands, 94 preparation/lifecycle
+assertions, 21 nested SQL assertions and Compose/VM cleanup passed. Paths are in
+the [verified public repository](https://github.com/Yash-PK/ops-containerized-service-platform). **C-CI** identifies
+[passing hosted validation](https://github.com/Yash-PK/ops-containerized-service-platform/actions/runs/37743386301) at
+`19ec88d5d4a6aa7541e7722b994618c3a6929cc5`; its [Linux report](https://github.com/Yash-PK/ops-containerized-service-platform/blob/cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe/evidence/19ec88d5d4a6-ci-linux.json)
+is preserved. The [v0.1.0 release](https://github.com/Yash-PK/ops-containerized-service-platform/releases/tag/v0.1.0) targets
+`cdea68d2a446d2c3e9c62f56631f4cc8a01ed3fe`, with [passing exact-target CI](https://github.com/Yash-PK/ops-containerized-service-platform/actions/runs/37743579858). The current
+recorded profile is Ubuntu ARM64 VZ with real Docker/Compose, not cloud proof.
+
 A capability can have different statuses for fixture and live profiles. Missing
 tools, skipped integrations, and mocks never become live passes. Publication and
 CI are tracked in [project status](PROJECT_STATUS.md), independently of this table.
@@ -75,11 +91,15 @@ CI are tracked in [project status](PROJECT_STATUS.md), independently of this tab
 | GPT, ext4/XFS, fstab and actual quota limits | Network/storage lab | `guest/storage.py`: `filesystems`, `quota`; `tests/test_storage.py` | Persisted checksums, non-root EDQUOT/recovery and scoped unmount/cleanup | N-VM: formal all-profile source e43bcdfdae1a; all 605 commands/110 assertions and cleanup passed | integration-tested |
 | LVM/filesystem expansion, RAID1 degradation/rebuild, LUKS | Network/storage lab | `guest/storage.py`: `lvm`, `raid`, `luks` | Growth/data invariants; degraded/rebuilt array checksums; wrong-key rejection and reopen | N-VM: formal all-profile source e43bcdfdae1a; all 605 commands/110 assertions and cleanup passed | integration-tested |
 | KVM/libvirt, other hypervisors and multiple-VM private switching | Network/storage extensions | No implementation | Separate supported provider and real lifecycle required | None; namespace clients are not additional VMs | planned |
-| API, async worker, PostgreSQL, queue/cache, migrations | Container platform | Planned reference application | Submit/complete job; deterministic seeds; API tests | None | planned |
-| Docker/Compose, image builds, readiness, persistence | Container platform | Planned Dockerfiles/Compose | Clean setup; restart persistence; outage handling | None | planned |
-| Namespaces/cgroups, signals, networking, image layers | Container platform | Planned bounded demonstrations | Graceful stop and resource/network observations | None | planned |
+| HTTP/input/cache/worker fixtures and controller safety | Container platform | `tests/`, `scripts/config_check.py`, `scripts/quality.py` | `make validate`; `make demo`; `make security` | C-local: 71 tests and all formal controller/clone command groups passed | statically-validated |
+| Bounded API, idempotency, asynchronous SQL worker | Container platform | `opsjobs/api.py`, `domain.py`, `database.py`, `worker.py`; `tests/test_api.py`, `test_worker_cache.py` | `make test`; real queued-to-completed workflow in `guest/scenario.py` | C-VM: actual asynchronous completion, replay/conflict rejection and recovery passed | integration-tested |
+| PostgreSQL migrations, seeds, lease fencing and role boundaries | Container platform | `migrations/001_jobs.sql`, `opsjobs/migrate.py`, `seed.py`, `sqlcheck.py` | Migration/seed repeats and concurrent SQL/lease assertions in `make integration LAB=ops-container-platform-reference` | C-VM: migrations/seeds and all 21 nested SQL assertions passed | integration-tested |
+| Valkey completed-result cache and outage fallback | Container platform | `opsjobs/cache.py`, `containers/cache.sh`, `guest/scenario.py` | Cache fixtures and stop/recover/fallback assertions | C-VM: real hits, outage fallback and recovery passed | integration-tested |
+| Docker/Compose, image builds, readiness, persistence | Container platform | `Dockerfile`, `compose.json`, `images.lock.json`, `containers/nginx.conf` | Clean build/job completion; restart persistence; dependency outage recovery | C-VM: clean build, readiness, restart persistence and outage recovery passed | integration-tested |
+| Namespaces/cgroups, non-root processes, signals, networking | Container platform | `compose.json`, `opsjobs/worker.py`, `api.py`, `guest/scenario.py` | API SIGTERM and explicit non-root/memory/CPU/AppArmor/port/network assertions | C-VM: non-root, memory/CPU, AppArmor, realized ports/networks and API SIGTERM passed; worker graceful-exit and configured-only controls unverified | integration-tested |
+| Credential files and scoped container/VM lifecycle | Container platform | `scripts/credentials.py`, `scripts/lab.py`, `guest/common.py`, `engine.py` | Negative path/identity tests; explicit lab ID, dry-run and owned teardown | C-local safety fixtures and C-VM owned credentials/lifecycle/cleanup passed; empty provider inventory | integration-tested |
 | Rootless Podman | Container platform extension | Planned separate profile | Rootless clean setup and workflow assertions | None | planned |
-| IaC modules, AWS networking/IAM/encryption/state | Cloud foundation | Planned primary engine/modules | fmt, validate, lint, policy, module mocks | None | planned |
+| IaC modules, AWS networking/IAM/encryption/state | Cloud foundation (only active project) | Planned OpenTofu modules; official dependency review starting | Planned fmt, validate, lint, policy and module mocks | None; implementation and checks not yet claimed | planned |
 | Authenticated AWS plan / cloud deployment | Cloud foundation gated profile | Planned gated configuration | Real plan/apply only after new authorization | None; disabled | planned |
 | GitHub Actions lint/test/build/artifacts/promotion | Delivery pipelines | Planned workflows/local scripts | Exact-SHA Actions run and local reproduction | None | planned |
 | Blocking quality gate and release rollback | Delivery pipelines | Planned negative fixture/promotion scripts | Intentional failure; restore prior artifact | None | planned |
