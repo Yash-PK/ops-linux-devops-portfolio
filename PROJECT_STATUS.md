@@ -4,14 +4,15 @@ Capability, publication, CI and release state are independent. This portfolio is
 lab/reference engineering work. The [evidence index](docs/evidence-index.md)
 identifies the exact source revisions and execution environments. Two of twelve
 engineering cores are complete; the hub makes three verified public repositories.
-Ten engineering projects remain, with network/storage prerequisite review active.
+Ten engineering projects remain incomplete, with network/storage implementation
+under active validation.
 
 | Project | Work state | Capability state | Publication | CI | Release |
 | --- | --- | --- | --- | --- | --- |
-| Portfolio hub | First milestone complete; supporting index | statically-validated; local/clone source `850a33de075c` | [Public hub](https://github.com/Yash-PK/ops-linux-devops-portfolio) verified at `f1de5b4ee591` | [Passed for `f1de5b4ee591`](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37573748935) | Work-in-progress index; no release intended |
+| Portfolio hub | First milestone complete; supporting index | statically-validated; original local/clone source `850a33de075c` | [Public hub](https://github.com/Yash-PK/ops-linux-devops-portfolio) verified at `cd9a6741e3d6` | [Passed for `cd9a6741e3d6`](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426) | Work-in-progress index; no release intended |
 | Linux operations toolkit | Bounded core complete; no longer active | integration-tested on Ubuntu x86-64 CI | Public repository; release target `0d164e9158ee` | Passed for `0d164e9158ee` | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-operations-toolkit/releases/tag/v0.1.0) |
 | Linux fleet automation | Bounded core complete; no longer active | integration-tested on Ubuntu and AlmaLinux ARM64 VMs | [Public repository](https://github.com/Yash-PK/ops-linux-fleet-automation); target `1531b86b54ee` | [Passed for `1531b86b54ee`](https://github.com/Yash-PK/ops-linux-fleet-automation/actions/runs/37615270935) | [v0.1.0 published](https://github.com/Yash-PK/ops-linux-fleet-automation/releases/tag/v0.1.0) |
-| Network/storage services lab | Only active engineering project; prerequisite/acceptance stage | planned | Not created | Not run | None |
+| Network/storage services lab | Only active engineering project; local source and fixtures implemented | implemented-unverified overall; controller statically validated | Not created | Not run | None |
 | Containerized service platform | Not started | planned | Not created | Not run | None |
 | Cloud foundation IaC | Not started | planned | Not created | Not run | None |
 | Delivery pipelines | Not started | planned | Not created | Not run | None |
@@ -107,7 +108,7 @@ the hub's plan, ledger, matrix, dependency/evidence indexes, and revision-linked
 reports. Commits describe those actual implementation and verification steps;
 no author identity, activity or results were fabricated. Inspect completed working
 trees on resumption. [NEXT_STEPS.md](NEXT_STEPS.md) records the active network/storage
-prerequisite review.
+validation work.
 
 ## Completed fleet core
 
@@ -143,8 +144,46 @@ multi-host availability and cloud deployment are outside the demonstrated core.
 
 ## Active continuation — network/storage services lab
 
-Project 3 is the only active engineering project, at prerequisite and bounded
-acceptance review. Its capability state remains planned; no networking/storage
-implementation, integration pass or remote is credited yet. Confirm a supported
-provider, isolated networking and inventoried virtual-disk ownership before
-implementing the first profile. Projects 4–12 remain roadmap entries.
+Project 3 is the only active engineering project. Source exists locally at
+`/Users/hbsu/ops-network-storage-services-lab`; overall status is
+**implemented-unverified**. No remote, GitHub CI run or release exists. Its bounded
+acceptance was defined before implementation. Projects 4–12 remain roadmap entries.
+
+The implementation uses a hash-pinned released fleet provider and local Lima VZ
+to provision one Ubuntu ARM64 VM, with guest-private namespace clients and owned
+loop-backed image files. It implements six network profiles (DNS, DHCP, NFS,
+Samba, TLS reverse proxy/load balancing, firewall/failure/capture) and four storage
+profiles (filesystems/fstab/quotas, LVM expansion, RAID recovery and LUKS).
+Its standalone bootstrap pins 41 Ubuntu snapshot packages; the controller separates
+preparation, authenticated reboot and profile execution, requiring the exact locked
+running kernel and retained AppArmor. No host mounts or host configuration changes
+are part of this design.
+
+The uncommitted implementation passed 120 fixture tests, Ruff, ShellCheck, shfmt,
+actionlint, documentation checks and the safe dry-run/invalid-input demo. These
+establish controller/static behavior only. No formal tested Git revision exists.
+An earlier real storage development run passed 438 commands and 63 assertions,
+including GPT/ext4/XFS persistence, quota EDQUOT/recovery, LVM growth, RAID1
+degradation/rebuild, LUKS rejection/reopen and scoped cleanup. Its source was
+uncommitted and subsequent kernel/library pinning requires a fresh run; this is
+not current-code release proof. The [evidence index](docs/evidence-index.md)
+retains its exact fingerprint and development boundary.
+
+Network development validation is active; no successful network or all-profile
+integration is credited in this snapshot. The earlier storage VM was deleted.
+The completed `053143` development run passed package/kernel, VLAN/routing, DNS,
+DHCP and NFS checks, then failed Samba startup. Its VM deletion passed. A fresh
+diagnostic run is in progress; inspect owned provider state before allocation
+or cleanup. Its ignored tools,
+image caches, runtime credentials and private diagnostics must remain unpublished.
+
+Next: resolve actual network VM failures, run fresh development profiles after any
+fixes, review/commit source, collect formal all-profile VM and controller/clean-clone
+evidence, then complete outgoing security/publishing gates and exact-head CI before
+release. No cloud deployment or container-package publication has occurred.
+
+The latest separately verified hub publication/CI snapshot is
+`cd9a6741e3d6d54e3cd39fff18d1f40359bf5313`, with
+[passing exact-target CI](https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426).
+It does not replace the original `850a33de075c` local/clone source or the archived
+`f1de5b4ee591` first-milestone hosted evidence.

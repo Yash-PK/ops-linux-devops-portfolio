@@ -22,14 +22,14 @@
       "verification": {
         "owner": "Yash-PK",
         "visibility": "PUBLIC",
-        "revision": "f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e",
+        "revision": "cd9a6741e3d6d54e3cd39fff18d1f40359bf5313",
         "default_branch": "main"
       }
     },
     "ci": {
       "state": "passed",
-      "revision": "f1de5b4ee59176cb0eaf9e9a4e61af308ebf516e",
-      "url": "https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37573748935"
+      "revision": "cd9a6741e3d6d54e3cd39fff18d1f40359bf5313",
+      "url": "https://github.com/Yash-PK/ops-linux-devops-portfolio/actions/runs/37731050426"
     }
   },
   "projects": [
@@ -109,7 +109,39 @@
       "id": "network-storage-services-lab",
       "repository": "ops-network-storage-services-lab",
       "active": true,
-      "capability_status": "planned",
+      "capability_status": "implemented-unverified",
+      "local_path": "../ops-network-storage-services-lab",
+      "validation": {
+        "source_revision": null,
+        "source_state": "uncommitted",
+        "controller": "statically-validated",
+        "fixture_tests_passed": 120,
+        "lint": "passed",
+        "safe_demo": "passed",
+        "clean_clone": "not-run",
+        "formal_all_profiles_vm": "not-run",
+        "network_development": "in-progress",
+        "earlier_storage_development": {
+          "development": true,
+          "revision": "uncommitted",
+          "code_sha256": "cb7df988b7260c318f24f38db86a2e334f9b8f0ad773017abf977cb0a3a9b1a6",
+          "report": ".runtime/reports/uncommitted-storage-vm-20261008T051145.json",
+          "commands": 438,
+          "assertions": 63,
+          "passed": true,
+          "cleanup_passed": true,
+          "qualifies_current_release": false
+        },
+        "latest_completed_network_development": {
+          "report": ".runtime/reports/uncommitted-network-vm-20261008T053143.json",
+          "development": true,
+          "revision": "uncommitted",
+          "passed": false,
+          "cleanup_passed": true,
+          "failure": "Samba exited 255 during startup; guest background-service cleanup assertion failed",
+          "qualifies_current_release": false
+        }
+      },
       "publishing": {
         "state": "not-created",
         "verified": false,

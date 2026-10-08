@@ -4,8 +4,8 @@ Repository order follows operational dependencies and keeps one engineering
 project active. Hub upkeep supports the active project and does not create another
 implementation workstream. This diagram describes the plan; the first
 two engineering cores are complete. The network/storage lab is the only active
-engineering project, at prerequisite/acceptance review; its capabilities remain
-planned until implementation and evidence exist.
+engineering project. Its source and standalone dependency bootstrap exist;
+complete current-code integration is still required before its core is complete.
 
 ```mermaid
 flowchart TD
@@ -35,6 +35,7 @@ acceptance checklist and a supported execution environment first.
 | Consumer | Required producer / contract | Reproduction rule |
 | --- | --- | --- |
 | Fleet and network/storage labs | Operations toolkit checks, when used | Pin a tested toolkit release; never depend on an untracked sibling checkout. |
+| Network/storage lab | Released fleet provider at `1531b86b54eee87d01da83f7b55d7d405f43fadb` | `component.lock.json` pins the provider source and license hashes; standalone bootstrap downloads and verifies it; each checkout owns separate provider state. No sibling import. |
 | Delivery | Reference app source, tests, build definition | Pin app revision/release; core checks reproduce locally. |
 | Kubernetes | Reference app artifact/configuration and delivery contract | Pin immutable artifact digest once authorized to publish; otherwise document locally built image and source revision accurately. |
 | Observability | Reference app instrumentation and deployed workload | Pin compatible instrumentation and platform releases, with minimal and extended profiles. |
@@ -47,6 +48,13 @@ The reference workload will be an asynchronous synthetic jobs service with API,
 worker, PostgreSQL, queue/cache, and reverse proxy. Delivery, Kubernetes,
 observability, security, and recovery will exercise this common application.
 The application is planned, not implemented by this hub.
+
+The active network/storage project also pins Lima VZ, an official Ubuntu ARM64
+image and 41 selected packages from snapshot `20261007T000000Z`. Its authenticated
+reboot must run locked kernel `6.8.0-146-generic` before profiles. Namespace clients
+and loop-backed disks are created only inside the owned VM. The earlier storage
+development pass preceded this dependency revision, so fresh complete integration
+is required. These pins do not establish KVM/libvirt or another provider.
 
 No remote source, dependency version, image digest, or cross-project release has
 been invented here. Each active project records official support/release/advisory

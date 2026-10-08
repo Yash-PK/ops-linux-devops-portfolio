@@ -54,7 +54,7 @@ It is neither a draft nor a prerelease. The original local and Linux reports rem
 tied to their earlier recorded source revisions.
 No default toolkit command remediates or changes host configuration. The first
 milestone is complete. Two engineering cores are now complete; the network/storage
-lab is the only active project, at prerequisite/acceptance review.
+lab is the only active project, with implementation undergoing required validation.
 
 ## Milestone 2: disposable operating-system labs
 
@@ -87,16 +87,30 @@ is verified at `1531b86b54eee87d01da83f7b55d7d405f43fadb` with
 The original reports retain their source identities. Debian, Rocky and other
 providers remain separate unverified alternatives; no cloud deployment is claimed.
 
-**3. `ops-network-storage-services-lab` (active prerequisite/acceptance stage;
-capabilities planned).** Isolated local VMs, private
-networks, and inventoried lab-owned virtual disks. Primary provider is selected
-after validating host support; KVM/libvirt is preferred on an appropriate Linux
-host, not assumed available on macOS. Separate DNS, isolated DHCP, NFS, Samba,
-reverse-proxy/load-balancing, local TLS, firewall, routing/bridge/VLAN, and storage
-profiles. Storage covers partitioning, ext4/XFS, LVM, software RAID, fstab, quotas,
-and LUKS. Core acceptance: client/server assertions, one bounded network fault,
-one storage recovery, and inventory-scoped teardown. Destructive demos require an
-explicit lab target, confirmation, dry run, and path/device ownership validation.
+**3. `ops-network-storage-services-lab` (active; implemented-unverified overall).**
+The local sibling repository implements a real Ubuntu 24.04 ARM64 VM using the
+released fleet provider, pinned at `1531b86b54eee87d01da83f7b55d7d405f43fadb` and
+verified by source-file SHA256. Lima VZ is the supported macOS ARM64 provider. Private
+Linux namespace clients inside the guest are not additional VMs. KVM/libvirt and
+other providers remain unimplemented alternatives. No sibling checkout is required.
+
+Six runnable network profiles implement DNS, isolated DHCP, NFS, Samba,
+reverse-proxy/load-balancing/local TLS, and firewall/failure/capture checks over
+guest-private bridges, VLANs and routed segments. Four storage profiles implement
+GPT/ext4/XFS/fstab/quotas, LVM expansion, RAID1 degradation/rebuild, and LUKS
+wrong-key rejection/reopen using inventoried guest-owned loop images. Explicit
+lab identity, dry run and confirmation guard destructive operations and teardown.
+The standalone bootstrap pins the provider, image and 41 packages from an Ubuntu
+snapshot; preparation is followed by authenticated reboot and exact running-kernel
+verification. Initial budget is one 2-CPU, 2-GiB VM with a 24-GiB sparse root disk.
+
+The current uncommitted implementation passed 120 controller/guest-safety fixture
+tests, required lint and the safe demo. An earlier development storage run passed
+438 commands and 63 assertions with profile cleanup and VM deletion; subsequent
+kernel/library pinning invalidates its use as current-code release proof. Network
+development validation is in progress. Required completion remains a clean-source
+all-profile VM run, controller/clean-clone evidence, outgoing/security review,
+verified publication and exact-target CI. No project 3 remote or release exists.
 
 ## Milestone 3: reference workload and delivery
 
